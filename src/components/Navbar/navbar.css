@@ -1,0 +1,93 @@
+.navbarContainer{
+    display: flex;
+    width:100%;
+    height:55px;
+    background-color: rgb(66, 103, 182);
+    position: sticky;
+    top: 0;
+    align-items: center;
+}
+
+.navbarLeft{
+    /* here we are giving the 3 columns of 12 columns of navbar to left part */
+    flex:3;
+}
+.navbarMid{
+    flex:5;
+}
+.navbarRight{
+    flex:4;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.navbarImg{
+    width:32px;
+    height:32px;
+    cursor: pointer;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo{
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.searchbar{
+    background-color: white;
+    border-radius: 30px;
+    width: 100%;
+    height:32px;
+    display:flex;
+    align-items: center;
+}
+
+.searchIcon{
+    font-size: 20px !important;
+    margin-left: 8px;
+}
+
+.searchInput{
+    border: none;
+    outline: none;
+    margin-left: 5px;
+    width: 80%;
+}
+
+.navbarLink{
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 10px;
+    color: white;
+}
+
+.navbarIcons{
+    display: flex;
+}
+
+.navbarIconsItem{
+    margin-right: 15px;
+    cursor: pointer;
+    position: relative;
+    color: white;
+
+}
+
+.navbarIconsBedge{
+    width:15px;
+    height:15px;
+    border-radius: 15px;
+    background-color: red;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    top:-5px;
+    right:-5px;
+}
+
