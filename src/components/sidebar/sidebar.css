@@ -1,7 +1,9 @@
 .sideBarContainer{
     flex:3;
     height: calc(100vh - 50px);
-    overflow-y: auto;
+    overflow-y: scroll;
+    position: sticky;
+    top: 50px;
 }
 
 ::-webkit-scrollbar {
@@ -62,21 +64,3 @@
     list-style: none;
 }
 
-.sidebarFriendsListItem{
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    cursor: pointer;
-}
-
-.sidebarFriendImage{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: 15px;
-}
-
-.sidebarFriendImageText{
-    margin-left:10px;
-}
