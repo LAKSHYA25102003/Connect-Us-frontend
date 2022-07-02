@@ -1,3 +1,93 @@
-.rightBarContainer{
+.rightbarContainer{
     flex:3.8;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: rgb(210, 200, 200);
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: gray;
+}
+
+.rightbarWrapper{
+    display: flex;
+    padding-top: 15px;
+    padding-right: 15px;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.birthdayContainer{
+    display: flex;
+    align-items: center;
+}
+
+.birthdayGift{
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.rightbarAd{
+    max-height: 500px;
+    width: 100%;
+    object-fit: contain;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.onlineFriendsList{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.onlineFriend{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.onlineFriendProfileImg{
+    height: 40px;
+    width:40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.rightbarTitle{
+    margin-top: 15px;
+}
+
+.rightbarOnlineIcon{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: lime;
+    position: absolute;
+    top:0px;
+    right:0px;
+    border: 2px solid white;
+}
+
+.onlineFriendProfileContainer{
+    position: relative;
+    margin-right: 10px;
+    z-index: -1;
+}
+
+.onlineFriendProfile{
+    font-weight: 500;
 }
