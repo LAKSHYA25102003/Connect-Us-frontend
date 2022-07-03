@@ -61,11 +61,13 @@
 .rightbarInfoItem{
     margin-bottom: 5px;
     margin-top: 5px;
+   
 }
 
 .rightbarInfoKey{
     font-weight: 500;
     color: #555;
+    margin-right: 10px;
 }
 
 .rightbarValue{
