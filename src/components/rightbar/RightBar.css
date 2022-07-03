@@ -46,3 +46,59 @@
     flex-direction: column;
 }
 
+
+
+.rightbarTitle{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.rightbarInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.rightbarInfoItem{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.rightbarInfoKey{
+    font-weight: 500;
+    color: #555;
+}
+
+.rightbarValue{
+    font-weight: 300;
+}
+
+.rightbarFollowings{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.rightbarFollowing{
+    display: flex;
+    margin-top: 8px;
+    flex-direction: column;
+    margin-left: 8px;
+    margin-top: 15px;
+}
+
+.rightbarFollowingImg{
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    object-fit: cover;
+    
+}
+
+.rightbarFollowingName{
+    margin-left: 10px;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
