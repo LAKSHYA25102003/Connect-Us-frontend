@@ -3,7 +3,10 @@ import { MoreVert } from "@mui/icons-material"
 import {Users} from "../../dummyData";
 import { useState } from "react";
 
+
 export default function Post(props) {
+
+    const pf=process.env.REACT_APP_PUBLLC_FOLDER;
 
     const [like,setLike]=useState(props.post.like)
     const [isLike,setIsLike]=useState(false);
@@ -19,7 +22,7 @@ export default function Post(props) {
         <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img className="postProfileImage" src={Users.filter((u)=>u.id===post.userId)[0].profilePicture} alt="Image" />
+                    <img className="postProfileImage" src={pf+Users.filter((u)=>u.id===post.userId)[0].profilePicture} alt="Image" />
                     <span className="postProfileName">{Users.filter((u)=>u.id===post.userId)[0].name}</span>
                     <span className="postDate">{post.date}</span>
                 </div>
@@ -29,7 +32,7 @@ export default function Post(props) {
             </div>
             <div className="postMid">
                 <span className="postText">{post.desc?post.desc:""}</span>
-                <img src={post.photo} alt="Post Image" className="postImage" />
+                <img src={pf+post.photo} alt="Post Image" className="postImage" />
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
