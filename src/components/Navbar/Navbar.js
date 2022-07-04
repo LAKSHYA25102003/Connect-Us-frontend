@@ -1,8 +1,31 @@
 import "./navbar.css";
 import { Search, Person, Notifications, Chat } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux/es/exports";
+import {getUser} from "../../redux/user"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+
+  useEffect(()=>{
+    if(localStorage.getItem("auth-token"))
+    {
+      dispatch(getUser());
+    }
+    else
+    {
+      navigate("/login");
+    }
+  },[])
+
+  const user=useSelector(state=>state.user.user);
+  
+
   return (
     <div className="navbarContainer">
       <div className="navbarLeft">

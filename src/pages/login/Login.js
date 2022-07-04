@@ -1,18 +1,27 @@
 import "./login.css"
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../redux/user";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+
 
 export default function Login() {
-  const dispatch=useDispatch();
+  const navigate=useNavigate();
 
   const email=useRef();
   const password=useRef();
 
+  useEffect(() => {
+
+    if (localStorage.getItem("auth-token")) {
+      navigate("/")
+    }
+  }, [])
+
   const handleClick=async (e)=>{
     e.preventDefault();
 
-    const url="http://localhost:8000/api/auth/login"
+    const url="http://localhost:8000/api/user/auth/login"
     const data={
       email:email.current.value,
       password:password.current.value
@@ -28,7 +37,7 @@ export default function Login() {
     if(response.success===true)
     {
       localStorage.setItem("auth-token",response.token);
-      console.log(response);
+      navigate("/");
     }
   }
 
@@ -47,9 +56,11 @@ export default function Login() {
             <form className="loginBox" onSubmit={handleClick}>
                 <input required={true} className="loginInput" type="email" placeholder="Email" name="email" ref={email} />
                 <input minLength="6" required={true} className="loginInput" type="password" placeholder="Password" name="password" ref={password} />
-                <button className="loginButton">Login</button>
+                <button className="loginButton" type="Submit">Login</button>
                 <span className="loginForget">Forgot Password?</span>
-                <button className="loginRegister">Create a New Account</button>
+                <button className="loginRegister" onClick={()=>{
+                  navigate("/register")
+                }}>Create a New Account</button>
             </form>
         </div>
       </div>

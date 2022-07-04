@@ -1,26 +1,48 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const userSlice=createSlice({
-    name:"user",
-    initialState:{
-        user:{},
-        status:false,
-        error:""
+export const getUser = createAsyncThunk(
+    "user/getUser",
+    async () => {
+        const url = `http://localhost:8000/api/user/get-user-by-token`;
+        let response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': "application/json",
+                'auth-token':localStorage.getItem("auth-token"),
+            },
+        })
+        response=await response.json();
+        return response;
+    }
+)
+
+
+export const userSlice = createSlice({
+    name: "user",
+    initialState: {
+        user: {},
+        status: null,
+        error: ""
     },
-    reducers:{
-        loginUser:(state,action)=>{
-            if(action.payload.message==='success')
-            {
-                state.user=action.payload.user;
-                state.status=true;
-            }
+    extraReducers:{
+        [getUser.pending]:(state)=>{
+            state.status="loading";
+        },
+        [getUser.fulfilled]:(state,action)=>{
+            state.status="success";
+            state.user=action.payload.user;
+        },
+        [getUser.rejected]:(state,action)=>{
+            state.status="failed";
+            state.error=action.error.message;
         }
     }
 })
 
 
-export const {loginUser}=userSlice.actions;
+
 
 export default userSlice.reducer;
 

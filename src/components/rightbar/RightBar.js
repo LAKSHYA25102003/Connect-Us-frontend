@@ -1,13 +1,28 @@
 import "./RightBar.css"
 import { Users } from "../../dummyData"
 import Online from '../online/Online'
-
-
-
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux/es/exports";
+import { getUser } from "../../redux/user";
+import { useEffect } from "react";
 
 
 export default function RightBar(props) {
+
+  const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem("auth-token")) {
+            dispatch(getUser());
+        }
+        else {
+            navigate("/login");
+        }
+    }, [])
+
+    const user = useSelector(state => state.user.user);
 
   const ProfileRightBar = () => {
 

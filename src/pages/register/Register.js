@@ -1,7 +1,21 @@
 import "./register.css"
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
+
+
+
 export default function Register() {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+
+    if (localStorage.getItem("auth-token")) {
+      navigate("/")
+    }
+  }, [])
+
 
 
 
@@ -27,7 +41,6 @@ export default function Register() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log("clicked");
     if (isSame()) {
       const data = {
         name: cred.name,
@@ -44,8 +57,9 @@ export default function Register() {
       })
 
       response = await response.json();
-      console.log(response);
-
+      if (response.success === true) {
+        navigate("/login");
+      }
     }
 
 
@@ -75,7 +89,9 @@ export default function Register() {
               </div>
             }
             <button required={true} className="registerButton" type="Submit">Sign Up</button>
-            <button required={true} className="registerLogin">Login to Your Account</button>
+            <button required={true} className="registerLogin" onClick={() => {
+              navigate("/login")
+            }}>Login to Your Account</button>
           </form>
         </div>
       </div>
