@@ -12,7 +12,6 @@ export default function Login() {
   const password=useRef();
 
   useEffect(() => {
-
     if (localStorage.getItem("auth-token")) {
       navigate("/")
     }
@@ -38,6 +37,11 @@ export default function Login() {
     {
       localStorage.setItem("auth-token",response.token);
       navigate("/");
+      return ;
+    }
+    else
+    {
+      console.log(response);
     }
   }
 
@@ -54,13 +58,13 @@ export default function Login() {
         </div>
         <div className="loginRight">
             <form className="loginBox" onSubmit={handleClick}>
-                <input required={true} className="loginInput" type="email" placeholder="Email" name="email" ref={email} />
-                <input minLength="6" required={true} className="loginInput" type="password" placeholder="Password" name="password" ref={password} />
+                <input autoComplete="on" required={true} className="loginInput" type="email" placeholder="Email" name="email" ref={email} />
+                <input autoComplete="on" minLength="6" required={true} className="loginInput" type="password" placeholder="Password" name="password" ref={password} />
                 <button className="loginButton" type="Submit">Login</button>
                 <span className="loginForget">Forgot Password?</span>
                 <button className="loginRegister" onClick={()=>{
                   navigate("/register")
-                }}>Create a New Account</button>
+                }} type="button" >Create a New Account</button>
             </form>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/exports";
 import { getUser } from "../../redux/user";
+import { Link } from "react-router-dom";
 
 export default function Share() {
 
@@ -28,8 +29,10 @@ export default function Share() {
         <div className="shareContainer">
             <div className="shareWrapper">
                 <div className="shareTop">
-                    <img src="/assets/persons/1.jpg" alt="Image" className="shareImageIcon" />
-                    <input placeholder="What are you thinking?" className="shareInput" />
+                    <Link to={`/profile/${user._id}/${user.name}`}>
+                        <img src={user.profilePicture || `/assets/profile.jpg`} alt="Image" className="shareImageIcon" />
+                    </Link>
+                    <input placeholder={`What are you thinking ${user.name}?`} className="shareInput" />
                 </div>
                 <hr className="shareHr" />
                 <div className="shareBottom">

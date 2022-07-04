@@ -11,18 +11,18 @@ import { useEffect } from "react";
 export default function RightBar(props) {
 
   const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if (localStorage.getItem("auth-token")) {
-            dispatch(getUser());
-        }
-        else {
-            navigate("/login");
-        }
-    }, [])
+  useEffect(() => {
+    if (localStorage.getItem("auth-token")) {
+      dispatch(getUser());
+    }
+    else {
+      navigate("/login");
+    }
+  }, [])
 
-    const user = useSelector(state => state.user.user);
+  const user = useSelector(state => state.user.user);
 
   const ProfileRightBar = () => {
 
@@ -32,42 +32,42 @@ export default function RightBar(props) {
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">City:</span>
-            <span className="rightbarInfoValue">Delhi</span>
+            <span className="rightbarInfoValue">{props.profileUser.city||"Mention Your City"}</span>
           </div>
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">From(Country):</span>
-            <span className="rightbarInfoValue">India</span>
+            <span className="rightbarInfoValue">{props.profileUser.from||"Mention Your Country"}</span>
           </div>
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">Single</span>
+            <span className="rightbarInfoValue">{props.profileUser.relationship||"Mention About Your RelationShip"}</span>
           </div>
         </div>
         <h4 className="rightbarTitle">
-            Friends
+          Friends
         </h4>
         <div className="rightbarFollowings">
-            <div className="rightbarFollowing">
-              <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
-              <span className="rightbarFollowingName">Jenny</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
-              <span className="rightbarFollowingName">Jenny</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
-              <span className="rightbarFollowingName">Jenny</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
-              <span className="rightbarFollowingName">Jenny</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
-              <span className="rightbarFollowingName">Jenny</span>
-            </div>
+          <div className="rightbarFollowing">
+            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <span className="rightbarFollowingName">Jenny</span>
           </div>
+          <div className="rightbarFollowing">
+            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <span className="rightbarFollowingName">Jenny</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <span className="rightbarFollowingName">Jenny</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <span className="rightbarFollowingName">Jenny</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <span className="rightbarFollowingName">Jenny</span>
+          </div>
+        </div>
       </div>
     )
   }
@@ -96,7 +96,7 @@ export default function RightBar(props) {
 
   return (
     <div className='rightbarContainer'>
-     {props.profile?<ProfileRightBar/>:<HomeRightBar/>}
+      {props.profileUser ? <ProfileRightBar /> : <HomeRightBar />}
     </div>
   )
 }

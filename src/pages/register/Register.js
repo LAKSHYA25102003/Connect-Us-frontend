@@ -79,10 +79,10 @@ export default function Register() {
         </div>
         <div className="registerRight">
           <form className="registerBox" onSubmit={handleClick}>
-            <input onChange={handleChange} value={cred.name} minLength="6" required={true} className="registerInput" type="text" placeholder="Username" name="name" />
-            <input onChange={handleChange} value={cred.email} required={true} className="registerInput" type="email" placeholder="Email" name="email" />
-            <input onChange={handleChange} value={cred.password} minLength="6" required={true} className="registerInput" type="password" placeholder="Password" name="password" />
-            <input onChange={handleChange} value={cred.confirmPassword} minLength="6" required={true} className="registerInput" type="text" placeholder="Confirm Password" name="confirmPassword" />
+            <input autoComplete="on" onChange={handleChange} value={cred.name} minLength="6" required={true} className="registerInput" type="text" placeholder="Username" name="name" />
+            <input autoComplete="on" onChange={handleChange} value={cred.email} required={true} className="registerInput" type="email" placeholder="Email" name="email" />
+            <input autoComplete="on" onChange={handleChange} value={cred.password} minLength="6" required={true} className="registerInput" type="password" placeholder="Password" name="password" />
+            <input autoComplete="on" onChange={handleChange} value={cred.confirmPassword} minLength="6" required={true} className="registerInput" type="text" placeholder="Confirm Password" name="confirmPassword" />
             {
               !isSame() && <div style={{ textAlign: "center", color: "red" }}>
                 Password and Confirm Password does not match!
@@ -91,7 +91,7 @@ export default function Register() {
             <button required={true} className="registerButton" type="Submit">Sign Up</button>
             <button required={true} className="registerLogin" onClick={() => {
               navigate("/login")
-            }}>Login to Your Account</button>
+            }} type="button">Login to Your Account</button>
           </form>
         </div>
       </div>

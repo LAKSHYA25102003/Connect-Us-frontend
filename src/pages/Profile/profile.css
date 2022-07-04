@@ -40,7 +40,7 @@
 }
 
 .profileUserInfo{
-    margin-top: 20px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,7 +50,7 @@
 .profileUserInfoDesc{
     text-align: center;
     font-weight: 300px;
-    margin-top: -15px;
+    margin-top: 5px
 }
 
 .profileUserInfoName{

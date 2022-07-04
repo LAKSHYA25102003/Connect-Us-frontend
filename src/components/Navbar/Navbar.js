@@ -2,34 +2,32 @@ import "./navbar.css";
 import { Search, Person, Notifications, Chat } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux/es/exports";
-import {getUser} from "../../redux/user"
+import { useDispatch } from "react-redux";
+import { getUser } from "../../redux/user"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
 
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(localStorage.getItem("auth-token"))
-    {
+  useEffect(() => {
+    if (localStorage.getItem("auth-token")) {
       dispatch(getUser());
     }
-    else
-    {
+    else {
       navigate("/login");
     }
-  },[])
+  }, [])
 
-  const user=useSelector(state=>state.user.user);
-  
+  const user = useSelector(state => state.user.user);
+
 
   return (
     <div className="navbarContainer">
       <div className="navbarLeft">
-        <Link to="/" style={{textDecoration:"none"}}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">ConnectUs</span>
         </Link>
       </div>
@@ -58,7 +56,9 @@ export default function Navbar() {
             <span className="navbarIconsBedge">1</span>
           </div>
         </div>
-        <img src="/assets/persons/1.jpg" alt="Person" className="navbarImg" />
+        <Link to={`/profile/${user._id}/${user.name}`}>
+          <img src={user.profilePicture || "/assets/profile.jpg"} alt="Person" className="navbarImg" />
+        </Link>
       </div>
     </div>
   )

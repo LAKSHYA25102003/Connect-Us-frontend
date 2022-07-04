@@ -13,10 +13,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={localStorage.getItem("auth-token")?<Home/>:<Login/>}/>
-        <Route path="/profile/:username" element={localStorage.getItem("auth-token")?<Profile/>:<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/" element={<Home/>}></Route>
+        <Route  exact path="/profile/:id/:username" element={<Profile/>}/>
+        <Route exact path="/register" element={<Register/>}/>
+        <Route exact path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   );
