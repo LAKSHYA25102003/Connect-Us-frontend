@@ -72,7 +72,7 @@ export default function Post(props) {
                 <div className="postTop">
                     <div className="postTopLeft">
                         <div onClick={linkHandler}>
-                        <img className="postProfileImage" src={postUser.profilePicture ||`${pf}profile.jpg`} alt="Image" />
+                        <img className="postProfileImage" src={postUser.profilePicture?pf+postUser.profilePicture:`${pf}profile.jpg`} alt="Image" />
                         </div>
                         <span className="postProfileName">{postUser.name}</span>
                         <span className="postDate">{format(post.createdAt)}</span>
@@ -84,7 +84,7 @@ export default function Post(props) {
                 <div className="postMid">
                     <span className="postText">{post.desc ? post.desc : ""}</span>
                     {
-                        post.img&&<img src={post.img} alt="Post Image" className="postImage" />
+                        post.img&&<img src={pf+post.img} alt="Post Image" className="postImage" />
                     }
                 </div>
                 <div className="postBottom">

@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-
+  const pf=process.env.REACT_APP_PUBLLC_FOLDER;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ export default function Navbar() {
           </div>
         </div>
         <Link to={`/profile/${user._id}/${user.name}`}>
-          <img src={user.profilePicture || "/assets/profile.jpg"} alt="Person" className="navbarImg" />
+          <img src={user.profilePicture?pf+user.profilePicture:`${pf}profile.jpg`} alt="Person" className="navbarImg" />
         </Link>
       </div>
     </div>

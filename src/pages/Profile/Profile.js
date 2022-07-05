@@ -46,8 +46,8 @@ export default function Profile() {
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileUserCover">
-                            <img className="profileUserCoverImg" src={postUser.coverPicture||`${pf}cover.jpg`} alt="" />
-                            <img src={postUser.profilePicture||`${pf}profile.jpg`} alt="" className="profileUserImg" />
+                            <img className="profileUserCoverImg" src={postUser.coverPicture?pf+postUser.coverPicture:`${pf}cover.jpg`} alt="" />
+                            <img src={postUser.profilePicture?pf+postUser.profilePicture:`${pf}profile.jpg`} alt="" className="profileUserImg" />
                         </div>
                         <div className="profileUserInfo">
                             <h4 className="profileUserInfoName">{postUser.name}</h4>

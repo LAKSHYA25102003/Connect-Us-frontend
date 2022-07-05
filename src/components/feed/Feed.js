@@ -13,6 +13,9 @@ import { specificUserPosts } from '../../redux/post';
 export default function Feed(props) {
 
 
+  const postCreated=()=>{
+    !props.profileId?dispatch(getPosts()):dispatch(specificUserPosts(props.profileId));
+  }
   
   const dispatch=useDispatch();
   useEffect(()=>{
@@ -25,7 +28,7 @@ export default function Feed(props) {
   return (
     <div className='feedContainer'>
       <div className="feedWrapper">
-        <Share/>
+        <Share postCreated={postCreated}/>
         {
           Posts.map((post)=>{
             return <Post key={post._id} post={post} />

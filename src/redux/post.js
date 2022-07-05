@@ -13,7 +13,7 @@ export const getPosts = createAsyncThunk(
                 'auth-token':localStorage.getItem("auth-token"),
             },
         })
-        response=await response.json();
+        response=await response.json();          
         return response;
     }
 )
@@ -58,6 +58,9 @@ export const userSlice = createSlice({
         [getPosts.fulfilled]:(state,action)=>{
             state.status="success";
             state.posts=action.payload.posts;
+            state.posts.sort((x, y) => {
+                return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1
+            })
         },
         [getPosts.rejected]:(state,action)=>{
             state.status="failed";
@@ -69,6 +72,9 @@ export const userSlice = createSlice({
         [specificUserPosts.fulfilled]:(state,action)=>{
             state.status="success";
             state.posts=action.payload.posts;
+            state.posts.sort((x, y) => {
+                return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1
+            })
         },
         [specificUserPosts.rejected]:(state,action)=>{
             state.status="failed";

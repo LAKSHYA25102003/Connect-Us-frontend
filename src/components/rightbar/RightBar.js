@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 export default function RightBar(props) {
 
+  const pf=process.env.REACT_APP_PUBLLC_FOLDER;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,23 +49,23 @@ export default function RightBar(props) {
         </h4>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
-            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <img className="rightbarFollowingImg" src={`${pf}1.jpg`} alt="" />
             <span className="rightbarFollowingName">Jenny</span>
           </div>
           <div className="rightbarFollowing">
-            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <img className="rightbarFollowingImg" src={`${pf}1.jpg`} alt="" />
             <span className="rightbarFollowingName">Jenny</span>
           </div>
           <div className="rightbarFollowing">
-            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <img className="rightbarFollowingImg" src={`${pf}1.jpg`} alt="" />
             <span className="rightbarFollowingName">Jenny</span>
           </div>
           <div className="rightbarFollowing">
-            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <img className="rightbarFollowingImg" src={`${pf}1.jpg`} alt="" />
             <span className="rightbarFollowingName">Jenny</span>
           </div>
           <div className="rightbarFollowing">
-            <img className="rightbarFollowingImg" src="/assets/persons/1.jpg" alt="" />
+            <img className="rightbarFollowingImg" src={`${pf}1.jpg`} alt="" />
             <span className="rightbarFollowingName">Jenny</span>
           </div>
         </div>
@@ -81,7 +82,7 @@ export default function RightBar(props) {
           <img className='birthdayGift' src="/assets/gift.png" alt="giftCard" />
           <span className='birthdayText'><b>Lakshya</b> and <b>other 2 friends</b> have birthday today.</span>
         </div>
-        <img className='rightbarAd' src="/assets/ad.jpg" alt="Advertisement" />
+        <img className='rightbarAd' src={`${pf}ad.jpg`} alt="Advertisement" />
         <h4 className='rightbarTitle'>Online Friends</h4>
         <ul className="onlineFriendsList">
           {
