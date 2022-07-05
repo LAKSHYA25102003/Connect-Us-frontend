@@ -7,38 +7,34 @@ import RightBar from "../../components/rightbar/RightBar"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {useParams} from "react-router";
+import axios from "axios"
 
 export default function Profile() {
     const params=useParams();
-    const [postUser, setPostUser] = useState({});
+    const [postUser, setPostUser] = useState(null);
     const pf=process.env.REACT_APP_PUBLLC_FOLDER;
-
+    const username=params.username;
     const navigate = useNavigate();
 
-    const fetchPostUser = async () => {
-        const url = `http://localhost:8000/api/user/get-user-by-id/${params.id}`
-        let response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': "application/json",
-            },
-        })
-        response = await response.json();
-        if (response.success === true) {
-            setPostUser(response.user);
-        }
-    }
+    
 
     useEffect(() => {
+        const fetchPostUser = async () => {
+            const url = `http://localhost:8000/api/user/get-user-by-id/${params.id}`
+            let response = await axios.get(url)
+            response=response.data;
+            if (response.success === true) {
+                setPostUser(response.user);
+            }
+        }
         if (!localStorage.getItem("auth-token")) {
             navigate("/login");
         }
         else {
             fetchPostUser();
         }
-    }, [])
-
-    return (
+    }, [username])
+    return postUser&&(
         <div>
             <Navbar />
             <div className="profileContainer">
@@ -55,8 +51,8 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Feed  profileId={params.id} />
-                        <RightBar profileUser={postUser} />
+                        <Feed  profileId={params.id}/>
+                        <RightBar postUser={postUser}/>
                     </div>
                 </div>
             </div>

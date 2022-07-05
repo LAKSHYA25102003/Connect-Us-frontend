@@ -1,5 +1,5 @@
 import "./share.css"
-import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material"
+import { PermMedia, Label, Room, EmojiEmotions,Cancel } from "@mui/icons-material"
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +53,7 @@ export default function Share(props) {
             try {
 
                 await axios.post("http://localhost:8000/api/upload",data)
+                setFile(null);
 
             } catch (error) {
                 console.log(error);
@@ -88,6 +89,12 @@ export default function Share(props) {
                     <input name="desc" value={desc.desc} placeholder={`What are you thinking ${user.name}?`} className="shareInput" onChange={(e) => { setDesc({ ...desc, [e.target.name]: e.target.value }) }} />
                 </div>
                 <hr className="shareHr" />
+                {
+                    file&&<div className="shareImageContainer">
+                        <img  className="shareImg" src={URL.createObjectURL(file)} alt="" />
+                        <Cancel className="shareImgCancel" onClick={()=>{setFile(null)}} />
+                    </div>
+                }
                 <form className="shareBottom" onSubmit={submitHandler}>
                     <div className="shareOptions">
                         <label htmlFor="file" className="shareOption">

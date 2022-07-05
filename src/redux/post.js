@@ -34,7 +34,6 @@ export const specificUserPosts = createAsyncThunk(
             },
         })
         response=await response.json();
-        console.log(response);
         return response;
     }
 )

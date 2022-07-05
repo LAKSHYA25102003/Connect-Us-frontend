@@ -12,6 +12,7 @@ import { specificUserPosts } from '../../redux/post';
 
 export default function Feed(props) {
 
+  const user=useSelector(state=>state.user.user);
 
   const postCreated=()=>{
     !props.profileId?dispatch(getPosts()):dispatch(specificUserPosts(props.profileId));
@@ -20,7 +21,7 @@ export default function Feed(props) {
   const dispatch=useDispatch();
   useEffect(()=>{
     !props.profileId?dispatch(getPosts()):dispatch(specificUserPosts(props.profileId));
-  },[])
+  },[props.profileId])
   
   const Posts=useSelector(state=>state.post.posts);
   
@@ -28,12 +29,17 @@ export default function Feed(props) {
   return (
     <div className='feedContainer'>
       <div className="feedWrapper">
-        <Share postCreated={postCreated}/>
         {
-          Posts.map((post)=>{
-            return <Post key={post._id} post={post} />
-          })
+        props.profileId?((props.profileId===user._id)&&<Share postCreated={postCreated}/>):
+        <Share postCreated={postCreated}/>
         }
+        {
+          Posts.length!==0?Posts.map((post)=>{
+            return <Post key={post._id} post={post} />
+          }):
+          <div style={{color:"gray",fontSize:"24px",fontWeight:"500"}}>No Posts!</div>
+        }
+        
       </div>
     </div>
   )
