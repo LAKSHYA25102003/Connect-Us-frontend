@@ -7,6 +7,7 @@
     position: sticky;
     top: 0;
     align-items: center;
+    position: relative;
 }
 
 .navbarLeft{
@@ -91,5 +92,32 @@
     font-size: 12px;
     top:-5px;
     right:-5px;
+}
+
+.navbarModal{
+    position: absolute;
+    background-color: #E1F4FA;
+    top: 50px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    justify-content: space-between;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+
+.navbarModalItem{
+    font-weight: 500;
+    font-size: 16px;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    cursor: pointer;
+}
+.navbarModalItem:hover{
+    color: white;
+    background-color:rgb(66, 103, 182) ;
+    border-radius: 5px;
 }
 

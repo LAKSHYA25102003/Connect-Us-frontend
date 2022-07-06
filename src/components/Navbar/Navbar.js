@@ -3,11 +3,13 @@ import { Search, Person, Notifications, Chat } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { getUser } from "../../redux/user"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const [modal,setModal]=useState(false);
   const pf=process.env.REACT_APP_PUBLLC_FOLDER;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,6 +22,12 @@ export default function Navbar() {
       navigate("/login");
     }
   }, [])
+
+  const logOutHandler=(e)=>{
+    e.preventDefault();
+    localStorage.removeItem("auth-token");
+    navigate("/login");
+  }
 
   const user = useSelector(state => state.user.user);
 
@@ -56,9 +64,22 @@ export default function Navbar() {
             <span className="navbarIconsBedge">1</span>
           </div>
         </div>
-        <Link to={`/profile/${user._id}/${user.name}`}>
-          <img src={user.profilePicture?pf+user.profilePicture:`${pf}profile.jpg`} alt="Person" className="navbarImg" />
-        </Link>
+        
+          <img onClick={()=>{setModal(!modal)}} src={user.profilePicture?pf+user.profilePicture:`${pf}profile.jpg`} alt="Person" className="navbarImg" />
+  
+        {
+          modal&&<div className="navbarModal">
+            <Link style={{textDecoration:"none"}} className="navbarModalItem" to={`/profile/${user._id}/${user.name}`}>
+              Go to Profile
+            </Link>
+            <Link className="navbarModalItem" style={{textDecoration:"none"}}  to={`/${user._id}/${user.name}/update-profile`}>
+              Update Profile
+            </Link>
+            <div className="navbarModalItem" onClick={logOutHandler}>
+              Log Out
+            </div>
+          </div>
+        }
       </div>
     </div>
   )

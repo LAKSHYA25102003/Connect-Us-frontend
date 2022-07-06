@@ -61,7 +61,7 @@ export default function Login() {
                 <input autoComplete="on" required={true} className="loginInput" type="email" placeholder="Email" name="email" ref={email} />
                 <input autoComplete="on" minLength="6" required={true} className="loginInput" type="password" placeholder="Password" name="password" ref={password} />
                 <button className="loginButton" type="Submit">Login</button>
-                <span className="loginForget">Forgot Password?</span>
+                <span className="loginForget" onClick={()=>{navigate("/reset-password")}}>Forgot Password?</span>
                 <button className="loginRegister" onClick={()=>{
                   navigate("/register")
                 }} type="button" >Create a New Account</button>
