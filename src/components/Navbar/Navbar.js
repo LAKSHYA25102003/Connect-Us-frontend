@@ -67,6 +67,7 @@ export default function Navbar() {
         
           <img onClick={()=>{setModal(!modal)}} src={user.profilePicture?pf+user.profilePicture:`${pf}profile.jpg`} alt="Person" className="navbarImg" />
   
+        <div className="navbarModalContainer">
         {
           modal&&<div className="navbarModal">
             <Link style={{textDecoration:"none"}} className="navbarModalItem" to={`/profile/${user._id}/${user.name}`}>
@@ -80,6 +81,7 @@ export default function Navbar() {
             </div>
           </div>
         }
+        </div>
       </div>
     </div>
   )

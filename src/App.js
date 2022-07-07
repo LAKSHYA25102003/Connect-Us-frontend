@@ -4,6 +4,7 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Reset from "./pages/resetPassword/Reset";
 import Update from "./pages/updateProfile/Update";
+import Messanger from "./pages/Messanger/Messanger";
 
 import {
   BrowserRouter,
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/reset-password" element={<Reset/>}/>
         <Route exact path="/:id/:username/update-profile" element={<Update/>}/>
+        <Route exact path="/messanger" element={<Messanger/>}/>
       </Routes>
     </BrowserRouter>
   );
