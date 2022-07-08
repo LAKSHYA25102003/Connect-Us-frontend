@@ -8,6 +8,7 @@ import { getUser } from "../../redux/user"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Navbar() {
   const [modal,setModal]=useState(false);
   const pf=process.env.REACT_APP_PUBLLC_FOLDER;

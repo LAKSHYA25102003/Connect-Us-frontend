@@ -1,5 +1,5 @@
 import "./share.css"
-import { PermMedia, Label, Room, EmojiEmotions,Cancel } from "@mui/icons-material"
+import { PermMedia, Label, Room, EmojiEmotions, Cancel } from "@mui/icons-material"
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -50,10 +50,10 @@ export default function Share(props) {
             data.append("name", filename);
             data.append("file", file);
             newPost.img = filename;
-            
+
             try {
 
-                await axios.post("http://localhost:8000/api/upload",data)
+                await axios.post("http://localhost:8000/api/upload", data)
                 setFile(null);
 
             } catch (error) {
@@ -61,21 +61,26 @@ export default function Share(props) {
             }
         }
 
-        const url = "http://localhost:8000/api/user/post";
-        let response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': "application/json",
-                'auth-token': localStorage.getItem("auth-token"),
-            },
-            body: JSON.stringify(newPost)
-        })
+        if (desc.desc === "" && !file) {
+            console.log("there is nothing to post\n");
+        }
+        else {
+            const url = "http://localhost:8000/api/user/post";
+            let response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                    'auth-token': localStorage.getItem("auth-token"),
+                },
+                body: JSON.stringify(newPost)
+            })
 
-        response = await response.json();
-        if (response.success === true) {
-            setDesc({ desc: "" });
-            props.postCreated();
+            response = await response.json();
+            if (response.success === true) {
+                setDesc({ desc: "" });
+                props.postCreated();
 
+            }
         }
 
     }
@@ -91,9 +96,9 @@ export default function Share(props) {
                 </div>
                 <hr className="shareHr" />
                 {
-                    file&&<div className="shareImageContainer">
-                        <img  className="shareImg" src={URL.createObjectURL(file)} alt="" />
-                        <Cancel className="shareImgCancel" onClick={()=>{setFile(null)}} />
+                    file && <div className="shareImageContainer">
+                        <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
+                        <Cancel className="shareImgCancel" onClick={() => { setFile(null) }} />
                     </div>
                 }
                 <form className="shareBottom" onSubmit={submitHandler}>

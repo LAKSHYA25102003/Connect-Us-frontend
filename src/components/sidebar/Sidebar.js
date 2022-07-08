@@ -14,7 +14,11 @@ import {
   School
 } from '@mui/icons-material'
 
+
 export default function Sidebar() {
+
+
+ 
   return (
     <div className='sideBarContainer'>
       <div className="sidebarWrapper">
@@ -32,7 +36,7 @@ export default function Sidebar() {
             <span className="sidebarListItemText">Videos</span>
           </li>
           <li className="sidebarListItem">
-            <Group className="sidebarIcon" />
+            <Group className="sidebarIcon"  />
             <span className="sidebarListItemText">Groups</span>
           </li>
           <li className="sidebarListItem">

@@ -18,7 +18,7 @@
 
 .messageTopText{
     padding: 10px;
-    border-radius: 30px;
+    border-radius: 8px;
     background-color: rgb(66, 103, 182);
     color: white;
     margin-left: 10px;
@@ -36,7 +36,7 @@
 }
 
 .message.own .messageTopText{
-    background-color: rgba(228, 228, 228, 0.54);
+    background-color: rgb(80, 116, 80,.8);
     color: black;
 }
 

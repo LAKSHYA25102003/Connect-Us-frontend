@@ -5,6 +5,7 @@ import Login from "./pages/login/Login";
 import Reset from "./pages/resetPassword/Reset";
 import Update from "./pages/updateProfile/Update";
 import Messanger from "./pages/Messanger/Messanger";
+import {Flasher} from "react-universal-flash";
 
 import {
   BrowserRouter,
@@ -15,6 +16,7 @@ import {
 function App() {
   return (
     <BrowserRouter>
+     <Flasher position="custom" />
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route  exact path="/profile/:id/:username" element={<Profile/>}/>
