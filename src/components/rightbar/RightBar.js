@@ -63,7 +63,8 @@ const RightBar = (props) => {
     }
   }
 
-  const messageClickHandler = async () => {
+  const messageClickHandler = async (e) => {
+    e.preventDefault();
     const data = {
       recieverId: `${postUser._id}`,
       senderId: `${user._id}`
@@ -108,7 +109,7 @@ const RightBar = (props) => {
                 </button>
                 <button className="rightbarFollowButton">
                   <span className="rightbarFollowButtonText" onClick={messageClickHandler}>Messages</span>
-                  <Chat />
+                  <Chat style={{marginLeft:"5px"}} />
                 </button>
               </div>
               :

@@ -2,6 +2,7 @@ import React from 'react'
 import "./sidebar.css"
 import Friends from '../friends/Friends'
 import {Users} from "../../dummyData";
+import { useNavigate } from 'react-router-dom';
 import {
   RssFeed,
   Chat,
@@ -16,8 +17,11 @@ import {
 
 
 export default function Sidebar() {
-
-
+  const navigate=useNavigate();
+  const chatClickHandler=(e)=>{
+    e.preventDefault();
+    navigate("/messanger");
+  }
  
   return (
     <div className='sideBarContainer'>
@@ -27,8 +31,8 @@ export default function Sidebar() {
             <RssFeed className="sidebarIcon" />
             <span className="sidebarListItemText">Feed</span>
           </li>
-          <li className="sidebarListItem" >
-            <Chat className="sidebarIcon" />
+          <li className="sidebarListItem" onClick={chatClickHandler} >
+            <Chat className="sidebarIcon"  />
             <span className="sidebarListItemText">Chats</span>
           </li>
           <li className="sidebarListItem">
