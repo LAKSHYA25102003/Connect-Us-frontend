@@ -4,13 +4,14 @@ import Online from '../online/Online'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Add, Remove } from '@mui/icons-material'
+import { Add, Remove, Chat, DriveFileMove } from '@mui/icons-material'
 import { getUser } from "../../redux/user";
 import { useDispatch } from "react-redux";
 
 
+
 const RightBar = (props) => {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const postUser = props.postUser;
   const pf = process.env.REACT_APP_PUBLLC_FOLDER;
@@ -33,34 +34,53 @@ const RightBar = (props) => {
   const unfollowHandler = async (e) => {
     e.preventDefault();
     const url = `http://localhost:8000/api/user/${postUser._id}/unfollow`;
-    let response = await fetch(url,{
-      method:"POST",
+    let response = await fetch(url, {
+      method: "POST",
       headers: {
         'Content-Type': "application/json",
-        'auth-token':localStorage.getItem("auth-token"),
-    },
+        'auth-token': localStorage.getItem("auth-token"),
+      },
     })
-    response=await response.json();
-    if(response.success==true)
-    {
+    response = await response.json();
+    if (response.success == true) {
       dispatch(getUser());
     }
   }
 
-  const followHandler=async (e) => {
+  const followHandler = async (e) => {
     e.preventDefault();
     const url = `http://localhost:8000/api/user/${postUser._id}/follow`;
-    let response = await fetch(url,{
-      method:"POST",
+    let response = await fetch(url, {
+      method: "POST",
       headers: {
         'Content-Type': "application/json",
-        'auth-token':localStorage.getItem("auth-token"),
-    },
+        'auth-token': localStorage.getItem("auth-token"),
+      },
     })
-    response=await response.json();
-    if(response.success==true)
-    {
+    response = await response.json();
+    if (response.success === true) {
       dispatch(getUser());
+    }
+  }
+
+  const messageClickHandler = async () => {
+    const data = {
+      recieverId: `${postUser._id}`,
+      senderId: `${user._id}`
+    }
+    const url = "http://localhost:8000/api/conversation";
+    let response = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': "application/json",
+        'auth-token': localStorage.getItem("auth-token"),
+      },
+      body: JSON.stringify(data)
+
+    })
+    response = await response.json();
+    if (response.success === true) {
+      navigate("/messanger");
     }
   }
 
@@ -72,22 +92,31 @@ const RightBar = (props) => {
     else {
       navigate("/login");
     }
-  }, [postUser,Object.keys(user).length])
+  }, [postUser, Object.keys(user).length])
+
+
 
   const ProfileRightBar = () => {
-    return  Object.keys(user).length!==0&&(
+    return Object.keys(user).length !== 0 && (
       <div className='rightbarWrapper'>
-        {(postUser._id !== user._id) &&
-          (user.following.includes(postUser._id) ?
-            <button className="rightbarFollowButton" onClick={unfollowHandler}>
-              <span className="rightbarFollowButtonText" >Unfollow</span>
-              <Remove/>
-            </button> :
-            <button className="rightbarFollowButton">
-              <span className="rightbarFollowButtonText" onClick={followHandler}>Follow</span>
-              <Add />
-            </button>)
-        }
+          {(postUser._id !== user._id) &&
+            (user.following.includes(postUser._id) ?
+              <div className="rightbarButtons">
+                <button className="rightbarFollowButton" onClick={unfollowHandler}>
+                  <span className="rightbarFollowButtonText" >Unfollow</span>
+                  <Remove />
+                </button>
+                <button className="rightbarFollowButton">
+                  <span className="rightbarFollowButtonText" onClick={messageClickHandler}>Messages</span>
+                  <Chat />
+                </button>
+              </div>
+              :
+              <button className="rightbarFollowButton">
+                <span className="rightbarFollowButtonText" onClick={followHandler}>Follow</span>
+                <Add />
+              </button>)
+          }
         <h4 className="rightbarTitle">User Information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
@@ -106,6 +135,7 @@ const RightBar = (props) => {
         <h4 className="rightbarTitle">
           Friends
         </h4>
+        <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between"}}>
         {
           friendList.length !== 0 ? friendList.map((friend) => {
             return (
@@ -122,6 +152,7 @@ const RightBar = (props) => {
           }) :
             <div style={{ color: "gray", fontSize: "20px", fontWeight: "500" }}>No Friends yet!</div>
         }
+        </div>
       </div>
     )
   }

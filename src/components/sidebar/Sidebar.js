@@ -27,7 +27,7 @@ export default function Sidebar() {
             <RssFeed className="sidebarIcon" />
             <span className="sidebarListItemText">Feed</span>
           </li>
-          <li className="sidebarListItem">
+          <li className="sidebarListItem" >
             <Chat className="sidebarIcon" />
             <span className="sidebarListItemText">Chats</span>
           </li>

@@ -10,10 +10,11 @@ import user, { getUser } from "../../redux/user";
 import { useDispatch } from "react-redux/es/exports";
 import { useRef } from "react"
 import { io } from "socket.io-client"
+import { useNavigate } from "react-router-dom";
 
 
 export default function Messanger() {
-
+    const navigate = useNavigate();
     const scrollRef = useRef();
     const dispatch = useDispatch();
     const [currChat, setCurrChat] = useState(null);
@@ -22,33 +23,38 @@ export default function Messanger() {
     const [newMessage, setNewMessage] = useState("");
     const currUser = useSelector((state) => state.user.user);
     const socket = useRef()
-    const [arrivalMessage,setArrivalMessage]=useState(null);
-    const [onlineUsers,setOnlineUsers]=useState([]);
+    const [arrivalMessage, setArrivalMessage] = useState(null);
+    const [onlineUsers, setOnlineUsers] = useState([]);
 
-    useEffect(()=>{
-        arrivalMessage&&currChat?.members.includes(arrivalMessage.sender)&&
-        setMessages((prev)=>[...prev,arrivalMessage]);
-    },[arrivalMessage])
-    
+    useEffect(() => {
+        arrivalMessage && currChat?.members.includes(arrivalMessage.sender) &&
+            setMessages((prev) => [...prev, arrivalMessage]);
+    }, [arrivalMessage])
+
 
     // to send some thing to server
     useEffect(() => {
         socket.current?.emit("addUser", currUser._id);
-        (currUser.following!==undefined)&&socket.current?.on("getUsers", users => {
-            setOnlineUsers(currUser.following.filter(f=>users.some(u=>f===u.userId)));
+        (currUser.following !== undefined) && socket.current?.on("getUsers", users => {
+            setOnlineUsers(currUser.following.filter(f => users.some(u => f === u.userId)));
         });
     }, [currUser])
 
     useEffect(() => {
-        socket.current=io("ws://localhost:9000")
-        dispatch(getUser());
-        socket.current.on("getMessage",(data)=>{
-            setArrivalMessage({
-                sender:data.senderId,
-                text:data.text,
-                createdAt:Date.now()
+        if (!localStorage.getItem("auth-token")) {
+            navigate("/login");
+        }
+        else {
+            socket.current = io("ws://localhost:9000")
+            dispatch(getUser());
+            socket.current.on("getMessage", (data) => {
+                setArrivalMessage({
+                    sender: data.senderId,
+                    text: data.text,
+                    createdAt: Date.now()
+                })
             })
-        })
+        }
     }, [])
 
 
@@ -88,7 +94,7 @@ export default function Messanger() {
     }, [messages.length])
 
 
-    const recieverid=currChat?.members.find(m=>m!==currUser._id);
+    const recieverid = currChat?.members.find(m => m !== currUser._id);
 
     const handleSend = async (e) => {
         e.preventDefault();
@@ -107,18 +113,18 @@ export default function Messanger() {
                 body: JSON.stringify(message)
             })
             response = await response.json();
-            if (response.success == true) {
+            if (response.success === true) {
                 messages.push(response.message);
                 setNewMessage("");
-                socket.current.emit("sendMessage",{
-                    senderId:currUser._id,
-                    recieverId:recieverid,
-                    text:newMessage
+                socket.current.emit("sendMessage", {
+                    senderId: currUser._id,
+                    recieverId: recieverid,
+                    text: newMessage
                 })
             }
 
-            
-            
+
+
         }
     }
     return conversations && (
