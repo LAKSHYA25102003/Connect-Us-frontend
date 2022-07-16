@@ -22,7 +22,7 @@ export default function Feed(props) {
   useEffect(()=>{
     !props.profileId?dispatch(getPosts()):dispatch(specificUserPosts(props.profileId));
   },[props.profileId])
-  
+
   const Posts=useSelector(state=>state.post.posts);
   
 

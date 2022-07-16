@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: relative;
 }
 .navbarImg {
   width: 40px;
@@ -94,25 +95,17 @@
 }
 
 .navbarModal {
-  position: absolute;
-  background-color: #e1f4fa;
-  top: 30px;
-  right: -10px;
   display: flex;
   flex-direction: column;
-  height: 170px;
-  justify-content: space-between;
+  background-color: aliceblue;
   border-radius: 5px;
-  border: 1px solid gray;
-  width: 120px;
 }
 
 .navbarModalItem {
-  font-weight: 500;
-  font-size: 16px;
+  padding: 8px;
   border-bottom: 1px solid gray;
+  color: black;
   cursor: pointer;
-  padding: 10px;
 }
 .navbarModalItem:hover {
   color: white;
@@ -121,7 +114,12 @@
 }
 
 .navbarModalContainer {
-  position: relative;
+  position: absolute;
+  top: 50px;
+  right: 5px;
+  -webkit-box-shadow: 0px 0px 9px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 9px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 9px 2px rgba(0, 0, 0, 0.75);
 }
 
 .search-results {
@@ -167,17 +165,17 @@
   }
 }
 
-.cancelIcon{
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    cursor: pointer;
+.cancelIcon {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  cursor: pointer;
 }
 
-.searchUserImage{
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
+.searchUserImage {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
 }

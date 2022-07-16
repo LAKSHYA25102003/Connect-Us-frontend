@@ -12,7 +12,6 @@ import { useRef } from "react"
 import { io } from "socket.io-client"
 import { useNavigate } from "react-router-dom";
 
-
 export default function Messanger() {
     const navigate = useNavigate();
     const scrollRef = useRef();
@@ -31,7 +30,6 @@ export default function Messanger() {
             setMessages((prev) => [...prev, arrivalMessage]);
     }, [arrivalMessage])
 
-
     // to send some thing to server
     useEffect(() => {
         socket.current?.emit("addUser", currUser._id);
@@ -47,13 +45,15 @@ export default function Messanger() {
         else {
             socket.current = io("ws://localhost:9000")
             dispatch(getUser());
-            socket.current.on("getMessage", (data) => {
+             socket.current.on("getMessage", (data) => {
                 setArrivalMessage({
                     sender: data.senderId,
                     text: data.text,
                     createdAt: Date.now()
                 })
+                
             })
+            
         }
     }, [])
 
@@ -114,9 +114,9 @@ export default function Messanger() {
             })
             response = await response.json();
             if (response.success === true) {
-                messages.push(response.message);
+                setMessages((prev) => [...prev, response.message]);
                 setNewMessage("");
-                socket.current.emit("sendMessage", {
+                await socket.current.emit("sendMessage", {
                     senderId: currUser._id,
                     recieverId: recieverid,
                     text: newMessage

@@ -18,10 +18,6 @@ export const getPosts = createAsyncThunk(
     }
 )
 
-
-
-
-
 export const specificUserPosts = createAsyncThunk(
     "post/specificUserPosts",
     async (id) => {
@@ -43,12 +39,23 @@ export const specificUserPosts = createAsyncThunk(
 
 
 
-export const userSlice = createSlice({
+export const postSlice = createSlice({
     name: "post",
     initialState: {
         posts: [],
         status: null,
         error: ""
+    },
+    reducers:{
+        deletePost: (state,action)=>{
+            state.posts=state.posts.filter((post)=>{
+                return (post._id!==action.payload.id)
+            });
+
+            state.posts.sort((x, y) => {
+                return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1
+            });
+        }
     },
     extraReducers:{
         [getPosts.pending]:(state)=>{
@@ -58,7 +65,7 @@ export const userSlice = createSlice({
             state.status="success";
             state.posts=action.payload.posts;
             state.posts.sort((x, y) => {
-                return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1
+                return new Date(x.createdAt) < new Date(y.createdAt) ? 1 : -1
             })
         },
         [getPosts.rejected]:(state,action)=>{
@@ -72,7 +79,7 @@ export const userSlice = createSlice({
             state.status="success";
             state.posts=action.payload.posts;
             state.posts.sort((x, y) => {
-                return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1
+                return new Date(x.createdAt) < new Date(y.createdAt) ? 1 : -1
             })
         },
         [specificUserPosts.rejected]:(state,action)=>{
@@ -83,8 +90,8 @@ export const userSlice = createSlice({
 })
 
 
+export const {deletePost} = postSlice.actions;
 
-
-export default userSlice.reducer;
+export default postSlice.reducer;
 
 

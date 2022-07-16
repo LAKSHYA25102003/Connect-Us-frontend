@@ -77,7 +77,7 @@ export default function Navbar() {
                 (searchResult.length > 0) ?
                   searchResult.map((s) => {
                     return (
-                      <Link key={s._id} className="searchUserInfo" to={`/profile/${s._id}/${s.name}`}>
+                      <Link key={s._id} onClick={()=>{setShowSearch(false)}} className="searchUserInfo" to={`/profile/${s._id}/${s.name}`}>
                         <img className="searchUserImage" src={s.profilePicture?pf+s.profilePicture:`${pf}profile.jpg`} alt="Img" />
                         <span>
                           {s.name}
