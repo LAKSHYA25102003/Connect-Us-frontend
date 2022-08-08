@@ -2,10 +2,16 @@ import "./login.css"
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useContext } from "react";
+import PostContext from "../../Context/post/PostContext";
 
 
 
 export default function Login() {
+
+  const context=useContext(PostContext);
+  const {loginSuccess,loginFail,ServerError}=context;
+
   const navigate=useNavigate();
 
   const email=useRef();
@@ -37,11 +43,19 @@ export default function Login() {
     {
       localStorage.setItem("auth-token",response.token);
       navigate("/");
+      loginSuccess();
       return ;
     }
     else
     {
-      console.log(response);
+      if(response.status===500)
+      {
+        ServerError();
+      }
+      else
+      {
+        loginFail();
+      }
     }
   }
 
@@ -49,7 +63,7 @@ export default function Login() {
     <div className="loginContainer">
       <div className="loginWrapper">
         <div className="loginLeft">
-            <h4 className="loginLogo">
+            <h4 className="loginLogo" >
                 ConnectUs
             </h4>
             <div className="loginDesc">

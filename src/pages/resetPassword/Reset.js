@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { useEffect } from "react";
+import { useContext } from "react";
+import PostContext from "../../Context/post/PostContext";
 import "./reset.css"
 
 export default function Reset() {
+    const context=useContext(PostContext);
+    const {passwordChange,notFound,ServerError}=context;
     const [render,setRender]=useState(false);
     const navigate = useNavigate();;
     const [cred, setCred] = useState({ email: "", password: "", confirmPassword: "" })
@@ -50,10 +54,19 @@ export default function Reset() {
             })
             response=await response.json();
             console.log(response);
-            if(response.success=true)
+            if(response.success===true)
             {
                 console.log("Password updated successfully");
+                passwordChange();
                 navigate("/login");
+            }
+            else if(response.status===404)
+            {
+                notFound();
+            }
+            else
+            {
+                ServerError();
             }
         }
     }

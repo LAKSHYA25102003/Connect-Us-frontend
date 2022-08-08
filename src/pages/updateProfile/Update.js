@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom';
 import axios from "axios";
+import { useContext } from "react";
+import PostContext from "../../Context/post/PostContext";
 
 export default function Update() {
+    const context=useContext(PostContext);
+    const {ServerError,profileUpdated}=context;
     const [profileFile,setProfileFile]=useState(null);
     const [coverFile,setCoverFile]=useState(null);
     const params = useParams();
@@ -77,7 +81,12 @@ export default function Update() {
         response =await  response.json();
         if(response.success===true)
         {
+            profileUpdated();
             navigate("/");
+        }
+        else
+        {
+            ServerError();
         }
 
     }

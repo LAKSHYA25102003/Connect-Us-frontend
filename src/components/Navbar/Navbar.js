@@ -7,9 +7,13 @@ import { useState } from "react";
 import { getUser } from "../../redux/user"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import PostContext from "../../Context/post/PostContext";
 
 
 export default function Navbar() {
+  const context=useContext(PostContext);
+  const {logoutSuccess}=context;
   const [modal, setModal] = useState(false);
   const pf = process.env.REACT_APP_PUBLLC_FOLDER;
   const dispatch = useDispatch();
@@ -31,6 +35,7 @@ export default function Navbar() {
     e.preventDefault();
     localStorage.removeItem("auth-token");
     navigate("/login");
+    logoutSuccess();
   }
 
   const onchange = (e) => {

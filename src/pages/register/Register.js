@@ -2,13 +2,15 @@ import "./register.css"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useContext } from "react";
+import PostContext from "../../Context/post/PostContext";
 
 
 
 export default function Register() {
-
+  const context=useContext(PostContext);
+  const {ServerError,UserAlreadyExist,registerSuccess}=context;
   const navigate = useNavigate();
-
   useEffect(() => {
 
     if (localStorage.getItem("auth-token")) {
@@ -57,8 +59,19 @@ export default function Register() {
       })
 
       response = await response.json();
+      console.log(response);
+      console.log(response.status);
       if (response.success === true) {
         navigate("/login");
+        registerSuccess();
+      }
+      else if(response.status===404)
+      {
+        UserAlreadyExist();
+      }
+      else
+      {
+        ServerError();
       }
     }
 

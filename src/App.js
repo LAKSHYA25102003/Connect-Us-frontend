@@ -6,6 +6,9 @@ import Reset from "./pages/resetPassword/Reset";
 import Update from "./pages/updateProfile/Update";
 import Messanger from "./pages/Messanger/Messanger";
 import PostState from "./Context/post/PostState";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import {
   BrowserRouter,
@@ -14,6 +17,7 @@ import {
 } from "react-router-dom";
 
 function App() {
+
   return (
     <PostState>
       <BrowserRouter>
@@ -27,6 +31,17 @@ function App() {
           <Route exact path="/messanger" element={<Messanger />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </PostState>
   );
 }

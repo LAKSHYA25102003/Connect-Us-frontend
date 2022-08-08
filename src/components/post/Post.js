@@ -11,6 +11,7 @@ import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 
 
+
 export default function Post(props) {
     const context=useContext(PostContext)
     const {deletePostFn}=context;
