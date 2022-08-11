@@ -104,6 +104,7 @@ export default function Navbar() {
           </div>
         }
       </div>
+      
       <div className="navbarRight">
         <div className="navbarLinks">
           <span className="navbarLink" onClick={(e) => { e.preventDefault(); navigate("/"); }}>HomePage</span>

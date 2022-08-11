@@ -89,7 +89,7 @@ export default function Post(props) {
                             displayPostEdit&&<div className="postEditContainer">
                                 <div className="postEdit">
                                     <div className="postEditItem" onClick={()=>{deletePostFn(post._id)}}>Delete Post</div>
-                                    <div className="postEditItem">Edit Post</div>
+                                    {/* <div className="postEditItem">Edit Post</div> */}
                                 </div>
                             </div>
                         }
