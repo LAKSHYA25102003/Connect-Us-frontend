@@ -22,6 +22,7 @@ export default function Navbar() {
   const user = useSelector(state => state.user.user);
   const [searchResult, setSearchResult] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
+  
   useEffect(() => {
     if (localStorage.getItem("auth-token")) {
       dispatch(getUser());

@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-
 
 export const getPosts = createAsyncThunk(
     "post/getPosts",
@@ -37,10 +32,6 @@ export const specificUserPosts = createAsyncThunk(
         return response;
     }
 )
-
-
-
-
 
 
 export const postSlice = createSlice({

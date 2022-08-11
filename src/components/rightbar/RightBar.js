@@ -11,12 +11,14 @@ import { useDispatch } from "react-redux";
 
 
 const RightBar = (props) => {
+  
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const postUser = props.postUser;
   const pf = process.env.REACT_APP_PUBLLC_FOLDER;
   const navigate = useNavigate();
   const [friendList, setFriendList] = useState([]);
+
   const fetchFriends = async () => {
     const url = "http://localhost:8000/api/user/friends/" + postUser._id;
     let response = await fetch(url, {
@@ -94,8 +96,6 @@ const RightBar = (props) => {
       navigate("/login");
     }
   }, [postUser, Object.keys(user).length])
-
-
 
   const ProfileRightBar = () => {
     return Object.keys(user).length !== 0 && (

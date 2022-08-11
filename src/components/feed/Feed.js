@@ -9,9 +9,7 @@ import { useEffect } from 'react';
 import { specificUserPosts } from '../../redux/post';
 
 
-
 export default function Feed(props) {
-
   const user=useSelector(state=>state.user.user);
 
   const postCreated=()=>{
@@ -24,7 +22,6 @@ export default function Feed(props) {
   },[props.profileId])
 
   const Posts=useSelector(state=>state.post.posts);
-  
 
   return (
     <div className='feedContainer'>

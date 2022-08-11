@@ -10,8 +10,6 @@ import { getUser } from "../../redux/user";
 import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 
-
-
 export default function Post(props) {
     const context=useContext(PostContext)
     const {deletePostFn}=context;
@@ -63,7 +61,7 @@ export default function Post(props) {
                 'auth-token': localStorage.getItem("auth-token"),
             },
         })
-        response = response.json();
+        response = await response.json();
         setIsLike(!isLike);
     }
 

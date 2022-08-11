@@ -10,8 +10,6 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
-
-
 export default function Share(props) {
     const pf = process.env.REACT_APP_PUBLLC_FOLDER;
     const [currPosts, setCurrPosts] = useState(useSelector(state => state.post.posts))
@@ -50,9 +48,7 @@ export default function Share(props) {
             data.append("name", filename);
             data.append("file", file);
             newPost.img = filename;
-
             try {
-
                 await axios.post("http://localhost:8000/api/upload", data)
                 setFile(null);
 

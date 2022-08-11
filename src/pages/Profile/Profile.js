@@ -10,13 +10,12 @@ import {useParams} from "react-router";
 import axios from "axios"
 
 export default function Profile() {
+    
     const params=useParams();
     const [postUser, setPostUser] = useState(null);
     const pf=process.env.REACT_APP_PUBLLC_FOLDER;
     const username=params.username;
     const navigate = useNavigate();
-
-    
 
     useEffect(() => {
         const fetchPostUser = async () => {

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 
 export default function Update() {
+
     const context=useContext(PostContext);
     const {ServerError,profileUpdated}=context;
     const [profileFile,setProfileFile]=useState(null);
@@ -15,6 +16,7 @@ export default function Update() {
     const [profileCred, setProfileCred] = useState({ name: "", email: "", desc: "", city: "", from: "", relationship: "" });
     const [render, setRender] = useState(false);
     const navigate = useNavigate();
+
     useEffect(() => {
         if (localStorage.getItem("auth-token")) {
             setRender(true);
@@ -63,6 +65,8 @@ export default function Update() {
             }
         }
 
+
+// here we are deleting the those key which are empty because other wise these key value will be replace with blank space
         for (let key in profileCred) {
             if (profileCred[key] === "") {
                 delete profileCred[key];

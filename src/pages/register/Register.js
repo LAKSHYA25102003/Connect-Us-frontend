@@ -5,28 +5,24 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 
-
-
 export default function Register() {
   const context=useContext(PostContext);
   const {ServerError,UserAlreadyExist,registerSuccess}=context;
-  const navigate = useNavigate();
-  useEffect(() => {
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
     if (localStorage.getItem("auth-token")) {
       navigate("/")
     }
-  }, [])
-
-
-
+  }, []);
 
   const [cred, setCred] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: ""
-  })
+  });
 
   const handleChange = (event) => {
     setCred({ ...cred, [event.target.name]: event.target.value });
@@ -57,7 +53,6 @@ export default function Register() {
         },
         body: JSON.stringify(data)
       })
-
       response = await response.json();
       console.log(response);
       console.log(response.status);

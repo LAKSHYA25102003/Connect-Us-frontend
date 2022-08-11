@@ -5,15 +5,10 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 
-
-
 export default function Login() {
-
   const context=useContext(PostContext);
   const {loginSuccess,loginFail,ServerError}=context;
-
   const navigate=useNavigate();
-
   const email=useRef();
   const password=useRef();
 
@@ -25,7 +20,6 @@ export default function Login() {
 
   const handleClick=async (e)=>{
     e.preventDefault();
-
     const url="http://localhost:8000/api/user/auth/login"
     const data={
       email:email.current.value,
