@@ -6,7 +6,7 @@ import Chatonline from "../../components/ChatOnline/Chatonline";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import user, { getUser } from "../../redux/user";
+import  { getUser } from "../../redux/user";
 import { useDispatch } from "react-redux/es/exports";
 import { useRef } from "react"
 import { io } from "socket.io-client"
@@ -28,14 +28,23 @@ export default function Messanger() {
     useEffect(() => {
         arrivalMessage && currChat?.members.includes(arrivalMessage.sender) &&
             setMessages((prev) => [...prev, arrivalMessage]);
-    }, [arrivalMessage])
+    }, [arrivalMessage,currChat])
 
     // to send some thing to server
     useEffect(() => {
-        socket.current?.emit("addUser", currUser._id);
-        (currUser.following !== undefined) && socket.current?.on("getUsers", users => {
-            setOnlineUsers(currUser.following.filter(f => users.some(u => f === u.userId)));
-        });
+        if (Object.keys(currUser).length !== 0) {
+            socket.current?.emit("addUser", currUser._id);
+            socket.current?.on("getUsers", users => {
+                setOnlineUsers(currUser.following.filter(f => users.some(u => f === u.userId)));
+            })
+        }
+        // (currUser.following !== undefined) && socket.current?.on("getUsers", users => {
+        //     setOnlineUsers(currUser.following.filter(f => users.some(u => f === u.userId)));
+        // });
+        // socket.current?.on("getUsers",users=>{
+        //     console.log("hii");
+        //     console.log(users);
+        // })
     }, [currUser])
 
     useEffect(() => {
@@ -45,18 +54,17 @@ export default function Messanger() {
         else {
             socket.current = io("ws://localhost:9000")
             dispatch(getUser());
-             socket.current.on("getMessage", (data) => {
+            socket.current.on("getMessage", (data) => {
                 setArrivalMessage({
                     sender: data.senderId,
                     text: data.text,
                     createdAt: Date.now()
                 })
-                
+
             })
-            
+
         }
     }, [])
-
 
     useEffect(() => {
         const getConversation = async () => {
@@ -92,7 +100,6 @@ export default function Messanger() {
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages.length])
-
 
     const recieverid = currChat?.members.find(m => m !== currUser._id);
 

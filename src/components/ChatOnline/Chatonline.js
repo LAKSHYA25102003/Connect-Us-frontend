@@ -1,12 +1,15 @@
 import "./chatonline.css"
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import PostContext from "../../Context/post/PostContext";
 
 export default function Chatonline(props) {
     const pf=process.env.REACT_APP_PUBLLC_FOLDER;
     const { onlineUsers, currUser, setCurrChat } = props;
     const [friends, setFriends] = useState([]);
     const [onlineFriends, setOnlineFriends] = useState(null);
-
+    const context=useContext(PostContext);
+    const {setOf}=context;
 
     useEffect(() => {
         const fetchFriends = async () => {
@@ -18,6 +21,7 @@ export default function Chatonline(props) {
             if (response.success === true) {
                 setFriends(response.friendlist);
                 setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
+                setOf(friends.filter((f) => onlineUsers.includes(f._id)));
             }
         }
         (currUser._id !== undefined) && fetchFriends();

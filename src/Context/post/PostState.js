@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { deletePost } from "../../redux/post";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
 
 export default function PostState(props) {
     const dispatch=useDispatch();
@@ -22,6 +23,9 @@ export default function PostState(props) {
             dispatch(deletePost({id}));
         }
     }
+
+
+    // pop up
 
     const loginSuccess=()=>{
         toast.success("Successfully Login!");
@@ -59,9 +63,12 @@ export default function PostState(props) {
         toast.warning("User is not found!");
     }
 
+    // online friends
+    const [of,setOf]=useState([]);
+
     return (
 
-        <PostContext.Provider value={{deletePostFn,loginSuccess,ServerError,loginFail,logoutSuccess,profileUpdated,UserAlreadyExist,registerSuccess,passwordChange,notFound}}>
+        <PostContext.Provider value={{deletePostFn,loginSuccess,ServerError,loginFail,logoutSuccess,profileUpdated,UserAlreadyExist,registerSuccess,passwordChange,notFound,of,setOf}}>
             {props.children}
         </PostContext.Provider>
 

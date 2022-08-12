@@ -1,5 +1,4 @@
 import "./RightBar.css"
-import { Users } from "../../dummyData"
 import Online from '../online/Online'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -7,17 +6,25 @@ import { useSelector } from "react-redux";
 import { Add, Remove, Chat, DriveFileMove } from '@mui/icons-material'
 import { getUser } from "../../redux/user";
 import { useDispatch } from "react-redux";
+import { useContext } from "react";
+import PostContext from "../../Context/post/PostContext";
 
 
 
 const RightBar = (props) => {
-  
+  const context=useContext(PostContext);
+  const{of}=context;
+  const [onlineFriends,setOnlineFriends]=useState(of);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const postUser = props.postUser;
   const pf = process.env.REACT_APP_PUBLLC_FOLDER;
   const navigate = useNavigate();
   const [friendList, setFriendList] = useState([]);
+
+  useEffect(()=>{
+    setOnlineFriends(of);
+  },[of.length])
 
   const fetchFriends = async () => {
     const url = "http://localhost:8000/api/user/friends/" + postUser._id;
@@ -171,8 +178,8 @@ const RightBar = (props) => {
         <h4 className='rightbarTitle'>Online Friends</h4>
         <ul className="onlineFriendsList">
           {
-            Users.map((u) => {
-              return <Online key={u.id} user={u} />
+            onlineFriends.map((u) => {
+              return <Online key={u._id} user={u} />
             })
           }
         </ul>
