@@ -10,7 +10,7 @@ export default function Message({ message, own,isMessageDeleted }) {
   const [showDelete,setshowDelete]=useState(false);
   useEffect(() => {
     const getUser = async () => {
-      const url = `http://localhost:8000/api/user/get-user-by-id/${message.sender}`
+      const url = `${process.env.REACT_APP_BASE_URL}api/user/get-user-by-id/${message.sender}`
       let response = await fetch(url, {
         method: "GET"
       })
@@ -26,7 +26,7 @@ export default function Message({ message, own,isMessageDeleted }) {
   const pf = process.env.REACT_APP_PUBLLC_FOLDER;
 
   const deleteMessage=async ()=>{
-    const url=`http://localhost:8000/api/message/delete/message/${message._id}`
+    const url=`${process.env.REACT_APP_BASE_URL}api/message/delete/message/${message._id}`
     let response=await fetch(url,{
       method:"DELETE",
       headers: {

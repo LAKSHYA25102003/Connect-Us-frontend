@@ -7,7 +7,7 @@ import RightBar from "../../components/rightbar/RightBar"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {useParams} from "react-router";
-import axios from "axios"
+import axios from "axios";
 
 export default function Profile() {
     
@@ -19,7 +19,7 @@ export default function Profile() {
 
     useEffect(() => {
         const fetchPostUser = async () => {
-            const url = `http://localhost:8000/api/user/get-user-by-id/${params.id}`
+            const url = `${process.env.REACT_APP_BASE_URL}api/user/get-user-by-id/${params.id}`
             let response = await axios.get(url)
             response=response.data;
             if (response.success === true) {

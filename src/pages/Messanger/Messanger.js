@@ -58,7 +58,7 @@ export default function Messanger() {
             navigate("/login");
         }
         else {
-            socket.current = io("ws://localhost:9000")
+            socket.current = io(`${process.env.REACT_APP_SOCKET_URL}`)
             dispatch(getUser());
             socket.current.on("getMessage", (data) => {
                 setArrivalMessage({
@@ -72,7 +72,7 @@ export default function Messanger() {
 
     useEffect(() => {
         const getConversation = async () => {
-            const url = `http://localhost:8000/api/conversation/${currUser._id}`
+            const url = `${process.env.REACT_APP_BASE_URL}api/conversation/${currUser._id}`
             let response = await fetch(url, {
                 method: "GET"
             })
@@ -87,7 +87,7 @@ export default function Messanger() {
 
 
     const getMessages = async () => {
-        const url = `http://localhost:8000/api/message/${currChat._id}`
+        const url = `${process.env.REACT_APP_BASE_URL}api/message/${currChat._id}`
         let response = await fetch(url, {
             method: "GET"
         })
@@ -116,7 +116,7 @@ export default function Messanger() {
                 sender: currUser._id.toString(),
                 conversationId: currChat._id.toString()
             }
-            const url = "http://localhost:8000/api/message";
+            const url = `${process.env.REACT_APP_BASE_URL}api/message`;
             let response = await fetch(url, {
                 method: "POST",
                 headers: {

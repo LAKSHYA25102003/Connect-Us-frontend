@@ -5,13 +5,15 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
+import { CircularProgress } from "@mui/material";
+
 
 export default function Update() {
-
-    const context=useContext(PostContext);
-    const {ServerError,profileUpdated}=context;
-    const [profileFile,setProfileFile]=useState(null);
-    const [coverFile,setCoverFile]=useState(null);
+    const [progress, setProgress] = useState(false);
+    const context = useContext(PostContext);
+    const { ServerError, profileUpdated } = context;
+    const [profileFile, setProfileFile] = useState(null);
+    const [coverFile, setCoverFile] = useState(null);
     const params = useParams();
     const [profileCred, setProfileCred] = useState({ name: "", email: "", desc: "", city: "", from: "", relationship: "" });
     const [render, setRender] = useState(false);
@@ -33,47 +35,45 @@ export default function Update() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(profileFile)
-        {
-            const data=new FormData();
+        setProgress(true);
+        if (profileFile) {
+            const data = new FormData();
             const filename = Date.now() + profileFile.name;
             data.append("name", filename);
             data.append("file", profileFile);
-            profileCred["profilePicture"]=filename;
-            try{
-                await axios.put("http://localhost:8000/api/upload-profilePicture",data)
+            profileCred["profilePicture"] = filename;
+            try {
+                await axios.put(`${process.env.REACT_APP_BASE_URL}api/upload-profilePicture`, data)
                 setProfileFile(null);
-            }catch(error)
-            {
+            } catch (error) {
+
                 console.log(error);
             }
         }
 
-        if(coverFile)
-        {
-            const data=new FormData();
+        if (coverFile) {
+            const data = new FormData();
             const filename = Date.now() + coverFile.name;
             data.append("name", filename);
             data.append("file", coverFile);
-            profileCred["coverPicture"]=filename;
-            try{
-                await axios.put("http://localhost:8000/api/upload-coverPicture",data)
+            profileCred["coverPicture"] = filename;
+            try {
+                await axios.put(`${process.env.REACT_APP_BASE_URL}api/upload-coverPicture`, data)
                 setCoverFile(null);
-            }catch(error)
-            {
+            } catch (error) {
                 console.log(error);
             }
         }
 
 
-// here we are deleting the those key which are empty because other wise these key value will be replace with blank space
+        // here we are deleting the those key which are empty because other wise these key value will be replace with blank space
         for (let key in profileCred) {
             if (profileCred[key] === "") {
                 delete profileCred[key];
             }
         }
 
-        const url = `http://localhost:8000/api/user/update/${params.id}`
+        const url = `${process.env.REACT_APP_BASE_URL}api/user/update/${params.id}`
         let response = await fetch(url, {
             method: "PUT",
             headers: {
@@ -82,16 +82,15 @@ export default function Update() {
             },
             body: JSON.stringify(profileCred)
         })
-        response =await  response.json();
-        if(response.success===true)
-        {
+        response = await response.json();
+        if (response.success === true) {
             profileUpdated();
             navigate("/");
         }
-        else
-        {
+        else {
             ServerError();
         }
+        setProgress(false);
 
     }
 
@@ -131,7 +130,7 @@ export default function Update() {
                         </div>
                         <div className="updateBoxItem">
                             <label htmlFor="relationship">Relationship:</label>
-                            <select  onChange={onChangeInput} style={{ cursor: "pointer" }} className="updateInput" name="relationship" id="relationship">
+                            <select onChange={onChangeInput} style={{ cursor: "pointer" }} className="updateInput" name="relationship" id="relationship">
                                 <option value="Married" selected={true} >Select</option>
                                 <option value="Single" >Single</option>
                                 <option value="Married" >Married</option>
@@ -140,14 +139,17 @@ export default function Update() {
                         <div>
                             <label style={{ cursor: "pointer", marginRight: "10px" }} htmlFor="profilePicture">Profile Picture:</label>
                             <input style={{ marginTop: "5px", cursor: "pointer" }} autoComplete="on" id="profilePicture" type="file" name="profilePicture" accept=".png,.jpeg,.jpg"
-                            onChange={(e)=>{setProfileFile(e.target.files[0])}} />
+                                onChange={(e) => { setProfileFile(e.target.files[0]) }} />
                         </div>
                         <div>
                             <label style={{ cursor: "pointer", marginRight: "10px" }} htmlFor="coverPicture">Cover Picture:</label>
                             <input style={{ marginTop: "5px", cursor: "pointer" }} autoComplete="on" id="coverPicture" type="file" name="coverPicture" accept=".png,.jpeg,.jpg"
-                            onChange={(e)=>{setCoverFile(e.target.files[0])}} />
+                                onChange={(e) => { setCoverFile(e.target.files[0]) }} />
                         </div>
-                        <button className="updateButton" type="Submit">Update</button>
+                        <button className="updateButton" type="Submit">{progress ? <div style={{
+                            height
+                                : "80%", display: "flex", justifyContent: "center", alignItems: "center"
+                        }}><CircularProgress style={{ color: "white" }} /></div> : "Update"}</button>
                         <button className="updateButton" type="button" onClick={() => { navigate(-1) }}>Back</button>
                     </form>
                 </div>

@@ -46,7 +46,7 @@ export default function Navbar() {
   const searchHandler = async (e) => {
     e.preventDefault();
     if (searchcred !== "") {
-      const url = `http://localhost:8000/api/user/search-user/${searchcred}`;
+      const url = `${process.env.REACT_APP_BASE_URL}api/user/search-user/${searchcred}`;
       let response = await fetch(url, {
         method: "GET",
         headers: {

@@ -13,7 +13,7 @@ export default function Chatonline(props) {
 
     useEffect(() => {
         const fetchFriends = async () => {
-            const url = `http://localhost:8000/api/user/friends/${currUser._id}`
+            const url = `${process.env.REACT_APP_BASE_URL}api/user/friends/${currUser._id}`
             let response = await fetch(url, {
                 method: "GET"
             })

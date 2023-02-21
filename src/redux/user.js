@@ -5,7 +5,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const getUser = createAsyncThunk(
     "user/getUser",
     async () => {
-        const url = `http://localhost:8000/api/user/get-user-by-token`;
+        const url = `${process.env.REACT_APP_BASE_URL}api/user/get-user-by-token`;
         let response = await fetch(url, {
             method: 'GET',
             headers: {

@@ -7,7 +7,7 @@ export default function Conversation(props) {
 
   const friendId=conversation.members.find((m)=>m!==currUser._id);
   const getFriends=async()=>{
-    const url=`http://localhost:8000/api/user/get-user-by-id/${friendId}`;
+    const url=`${process.env.REACT_APP_BASE_URL}api/user/get-user-by-id/${friendId}`;
     let response=await fetch(url,{
       method:"GET",
     })

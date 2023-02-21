@@ -33,7 +33,7 @@ export default function Reset2() {
         const data={
             email:email
         }
-        const url=`http://localhost:8000/api/auth-mail/password-generate-link`
+        const url=`${process.env.REACT_APP_BASE_URL}api/auth-mail/password-generate-link`
         let response=await fetch(url,{
             method:"post",
             headers:{

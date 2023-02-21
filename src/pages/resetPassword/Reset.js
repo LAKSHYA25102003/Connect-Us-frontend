@@ -27,7 +27,7 @@ export default function Reset() {
     }
 
     const confirmLink=async ()=>{
-        const url=`http://localhost:8000/api/auth-mail/check-link/${params.token}`
+        const url=`${process.env.REACT_APP_BASE_URL}api/auth-mail/check-link/${params.token}`
         let response = await fetch(url,{
             method:"post",
         })
@@ -58,7 +58,7 @@ export default function Reset() {
 
     const submitPassword=async (e)=>{
         e.preventDefault();
-        const url=`http://localhost:8000/api/auth-mail/set-new-password/${params.token}`;
+        const url=`${process.env.REACT_APP_BASE_URL}api/auth-mail/set-new-password/${params.token}`;
         if(!isSame)
         {
             return ;

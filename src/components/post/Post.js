@@ -22,7 +22,7 @@ export default function Post(props) {
     const currUser = useSelector(state => state.user.user);
 
     const fetchPostUser = async () => {
-        const url = `http://localhost:8000/api/user/get-user-by-id/${props.post.userId}`
+        const url = `${process.env.REACT_APP_BASE_URL}api/user/get-user-by-id/${props.post.userId}`
         let response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -53,7 +53,7 @@ export default function Post(props) {
 
     const likeHandler = async () => {
         isLike ? setLike(like - 1) : setLike(like + 1);
-        const url = `http://localhost:8000/api/user/post/${post._id}/like`;
+        const url = `${process.env.REACT_APP_BASE_URL}api/user/post/${post._id}/like`;
         let response = await fetch(url, {
             method: 'PUT',
             headers: {

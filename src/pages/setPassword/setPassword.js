@@ -43,7 +43,7 @@ const token=useParams();
     const data={
         password:pass
     }
-    const url=`http://localhost:8000/api/auth-mail/acceptUser/${token.token}`;
+    const url=`${process.env.REACT_APP_BASE_URL}api/auth-mail/acceptUser/${token.token}`;
     let response = await fetch(url,{
         method:"post",
         headers:{

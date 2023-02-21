@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Reset2 from "./pages/resetPassword/Reset2";
 import Confirmation_page from "./pages/resetPassword/Confirmation_page";
-import SetPassword from "./pages/setPassword/setPassword";
+import SetPassword from "./pages/setPassword/setPassword.js";
 
 import {
   BrowserRouter,

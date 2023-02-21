@@ -6,6 +6,7 @@ import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 import { CircularProgress } from "@mui/material";
 
+
 export default function Register() {
   const context = useContext(PostContext);
   const { notify } = context;
@@ -38,7 +39,7 @@ export default function Register() {
       name: name,
       email: email,
     }
-    const url = "http://localhost:8000/api/auth-mail/createUser"
+    const url = `${process.env.REACT_APP_BASE_URL}api/auth-mail/createUser`
     let response = await fetch(url, {
       method: 'POST',
       headers: {

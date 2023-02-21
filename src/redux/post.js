@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const getPosts = createAsyncThunk(
     "post/getPosts",
     async () => {
-        const url = `http://localhost:8000/api/user/post/timeline/all`;
+        const url = `${process.env.REACT_APP_BASE_URL}api/user/post/timeline/all`;
         let response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -20,7 +20,7 @@ export const getPosts = createAsyncThunk(
 export const specificUserPosts = createAsyncThunk(
     "post/specificUserPosts",
     async (id) => {
-        const url = `http://localhost:8000/api/user/post/profile/${id}`;
+        const url = `${process.env.REACT_APP_BASE_URL}api/user/post/profile/${id}`;
         let response = await fetch(url, {
             method: 'GET',
             headers: {

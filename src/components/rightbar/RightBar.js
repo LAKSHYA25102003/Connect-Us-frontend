@@ -8,10 +8,13 @@ import { getUser } from "../../redux/user";
 import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
+import { CircularProgress } from "@mui/material";
 
 
 
 const RightBar = (props) => {
+  const [cprogress, setcProgress] = useState(false);
+  const [fprogress, setfProgress] = useState(false);
   const context=useContext(PostContext);
   const{of}=context;
   const [onlineFriends,setOnlineFriends]=useState(of);
@@ -27,7 +30,7 @@ const RightBar = (props) => {
   },[of.length])
 
   const fetchFriends = async () => {
-    const url = "http://localhost:8000/api/user/friends/" + postUser._id;
+    const url = `${process.env.REACT_APP_BASE_URL}api/user/friends/${postUser._id}`;
     let response = await fetch(url, {
       method: "GET",
       headers: {
@@ -41,8 +44,9 @@ const RightBar = (props) => {
   }
 
   const unfollowHandler = async (e) => {
+    setfProgress(true);
     e.preventDefault();
-    const url = `http://localhost:8000/api/user/${postUser._id}/unfollow`;
+    const url = `${process.env.REACT_APP_BASE_URL}api/user/${postUser._id}/unfollow`;
     let response = await fetch(url, {
       method: "POST",
       headers: {
@@ -54,11 +58,13 @@ const RightBar = (props) => {
     if (response.success == true) {
       dispatch(getUser());
     }
+    setfProgress(false);
   }
 
   const followHandler = async (e) => {
+    setfProgress(true);
     e.preventDefault();
-    const url = `http://localhost:8000/api/user/${postUser._id}/follow`;
+    const url = `${process.env.REACT_APP_BASE_URL}api/user/${postUser._id}/follow`;
     let response = await fetch(url, {
       method: "POST",
       headers: {
@@ -70,15 +76,17 @@ const RightBar = (props) => {
     if (response.success === true) {
       dispatch(getUser());
     }
+    setfProgress(false)
   }
 
   const messageClickHandler = async (e) => {
     e.preventDefault();
+    setcProgress(true);
     const data = {
       recieverId: `${postUser._id}`,
       senderId: `${user._id}`
     }
-    const url = "http://localhost:8000/api/conversation";
+    const url = `${process.env.REACT_APP_BASE_URL}api/conversation`;
     let response = await fetch(url, {
       method: "POST",
       headers: {
@@ -92,6 +100,7 @@ const RightBar = (props) => {
     if (response.success === true) {
       navigate("/messanger");
     }
+    setcProgress(false);
   }
 
 
@@ -111,17 +120,26 @@ const RightBar = (props) => {
             (user.following.includes(postUser._id) ?
               <div className="rightbarButtons">
                 <button className="rightbarFollowButton" onClick={unfollowHandler}>
-                  <span className="rightbarFollowButtonText" >Unfollow</span>
+                  <span className="rightbarFollowButtonText" >{fprogress ? <div style={{
+              height
+                : "80%", display: "flex", justifyContent: "center", alignItems: "center"
+            }}><CircularProgress style={{ color: "white" }} /></div> : "Unfollow"}</span>
                   <Remove />
                 </button>
                 <button className="rightbarFollowButton">
-                  <span className="rightbarFollowButtonText" onClick={messageClickHandler}>Messages</span>
+                  <span className="rightbarFollowButtonText" onClick={messageClickHandler}>{cprogress ? <div style={{
+              height
+                : "80%", display: "flex", justifyContent: "center", alignItems: "center"
+            }}><CircularProgress style={{ color: "white" }} /></div> : "Chat"}</span>
                   <Chat style={{marginLeft:"5px"}} />
                 </button>
               </div>
               :
               <button className="rightbarFollowButton">
-                <span className="rightbarFollowButtonText" onClick={followHandler}>Follow</span>
+                <span className="rightbarFollowButtonText" onClick={followHandler}>{fprogress ? <div style={{
+              height
+                : "80%", display: "flex", justifyContent: "center", alignItems: "center"
+            }}><CircularProgress style={{ color: "white" }} /></div> : "Follow"}</span>
                 <Add />
               </button>)
           }
@@ -140,6 +158,7 @@ const RightBar = (props) => {
             <span className="rightbarInfoValue">{postUser.relationship || "Relationship information is not added"}</span>
           </div>
         </div>
+
         <h4 className="rightbarTitle">
           Friends
         </h4>

@@ -49,7 +49,7 @@ export default function Share(props) {
             data.append("file", file);
             newPost.img = filename;
             try {
-                await axios.post("http://localhost:8000/api/upload", data)
+                await axios.post(`${process.env.REACT_APP_BASE_URL}api/upload`, data)
                 setFile(null);
 
             } catch (error) {
@@ -61,7 +61,7 @@ export default function Share(props) {
             console.log("there is nothing to post\n");
         }
         else {
-            const url = "http://localhost:8000/api/user/post";
+            const url = `${process.env.REACT_APP_BASE_URL}api/user/post`;
             let response = await fetch(url, {
                 method: 'POST',
                 headers: {
