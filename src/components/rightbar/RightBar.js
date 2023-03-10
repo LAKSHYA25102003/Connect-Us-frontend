@@ -115,7 +115,7 @@ const RightBar = (props) => {
 
   const ProfileRightBar = () => {
     return Object.keys(user).length !== 0 && (
-      <div className='rightbarWrapper'>
+      <div className='rightbarWrapper '>
           {(postUser._id !== user._id) &&
             (user.following.includes(postUser._id) ?
               <div className="rightbarButtons">
@@ -188,7 +188,7 @@ const RightBar = (props) => {
 
   const HomeRightBar = () => {
     return (
-      <div className="rightbarWrapper">
+      <div className="rightbarWrapper ">
         <div className="birthdayContainer">
           <img className='birthdayGift' src="/assets/gift.png" alt="giftCard" />
           <span className='birthdayText'><b>Lakshya</b> and <b>other 2 friends</b> have birthday today.</span>

@@ -35,11 +35,8 @@
     flex-direction: column;
 }
 
-.registerLogo{
-    font-size: 55px;
-    font-weight: 700px;   
+.registerLogo{ 
     color: rgb(66, 103, 182);
-    margin-bottom: 10px;
 }
 
 .registerBox{

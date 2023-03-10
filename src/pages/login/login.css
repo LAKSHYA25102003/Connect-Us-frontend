@@ -1,9 +1,9 @@
 .loginContainer {
-  display: flex;
+  display: flex-column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   background-color: #e1f4fa;
 }
 
@@ -35,10 +35,7 @@
 }
 
 .loginLogo {
-  font-size: 55px;
-  font-weight: 700px;
   color: rgb(66, 103, 182);
-  margin-bottom: 10px;
 }
 
 .loginBox {

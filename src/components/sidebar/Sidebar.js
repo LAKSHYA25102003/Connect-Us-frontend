@@ -35,7 +35,7 @@ export default function Sidebar() {
             <Chat className="sidebarIcon"  />
             <span className="sidebarListItemText">Chats</span>
           </li>
-          <li className="sidebarListItem">
+          {/* <li className="sidebarListItem">
             <PlayCircleFilledOutlined className="sidebarIcon" />
             <span className="sidebarListItemText">Videos</span>
           </li>
@@ -62,7 +62,7 @@ export default function Sidebar() {
           <li className="sidebarListItem">
             <School className="sidebarIcon" />
             <span className="sidebarListItemText">Courses</span>
-          </li>
+          </li> */}
         </ul>
         <button className="sidebarButton">
           Show More

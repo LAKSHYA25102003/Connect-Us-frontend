@@ -7,22 +7,27 @@ import { useEffect } from "react"
 import "./home.css"
 
 export default function Home() {
-  const navigate=useNavigate();
-  
-  useEffect(()=>{
-    if(!localStorage.getItem("auth-token"))
-    {
-        navigate("/login");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("auth-token")) {
+      navigate("/login");
     }
-  },[])
+  }, [])
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="homeContainer">
-        <Sidebar/>
-        <Feed/>
-        <RightBar/>
+        <div className="hidden md:block w-[23%]">
+          <Sidebar />
+        </div>
+        <div className="w-[100%] md:w-[46%]">
+          <Feed />
+        </div>
+        <div className="hidden md:block w-[31%]">
+          <RightBar />
+        </div>
       </div>
     </div>
   )

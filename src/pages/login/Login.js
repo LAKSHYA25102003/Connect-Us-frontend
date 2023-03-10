@@ -9,7 +9,6 @@ import { useState } from "react";
 
 export default function Login() {
   const [progress, setProgress] = useState(false);
-
   const context = useContext(PostContext);
   const { loginSuccess, loginFail, ServerError } = context;
   const navigate = useNavigate();
@@ -57,18 +56,18 @@ export default function Login() {
   }
 
   return (
-    <div className="loginContainer">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h4 className="loginLogo" >
+    <div className="bg-[#e1f4fa] min-w-[100vw] min-h-[100vh] flex justify-center items-center">
+      <div className="flex flex-col sm:flex-row">
+        <div className="left flex flex-col justify-center max-[641px]:items-center sm:pl-[20px] w-[100%] sm:w-[50%]">
+          <h4 className="loginLogo text-[36px] sm:text-[55px] font-medium" >
             ConnectUs
           </h4>
-          <div className="loginDesc">
+          <div className="text-[15px] sm:text-[24px] max-[641px]:text-center font-medium w-[90%] sm:w-[70%]">
             Connect with friends and the world around you on ConnectUs.
           </div>
         </div>
-        <div className="loginRight">
-          <form className="loginBox" onSubmit={handleClick}>
+        <div className="flex justify-center items-center mt-[20px] w-[100%] sm:w-[50%]">
+          <form className="gap-[20px] flex flex-col p-[20px] bg-white rounded-[10px] w-[80%]" onSubmit={handleClick}>
             <input autoComplete="on" required={true} className="loginInput" type="email" placeholder="Email" name="email" ref={email} />
             <input autoComplete="on" minLength="6" required={true} className="loginInput" type="password" placeholder="Password" name="password" ref={password} />
             <button className="loginButton" type="Submit"> {progress ? <div style={{
@@ -78,7 +77,7 @@ export default function Login() {
             <span className="loginForget" onClick={() => { navigate("/reset-password") }}>Forgot Password?</span>
             <button className="loginRegister" onClick={() => {
               navigate("/register")
-            }} type="button" >Create a New Account</button>
+            }} type="button" >Sign Up</button>
           </form>
         </div>
       </div>

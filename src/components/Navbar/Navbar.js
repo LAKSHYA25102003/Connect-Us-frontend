@@ -64,16 +64,16 @@ export default function Navbar() {
 
 
   return (
-    <div className="navbarContainer">
-      <div className="navbarLeft">
+    <div className="navbarContainer flex w-[100%] py-[10px] ">
+      <div className="w-[32%] sm:w-[26%]">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">ConnectUs</span>
+          <span className="logo md:pl-[20px] text-[20px] md:text-[24px]">ConnectUs</span>
         </Link>
       </div>
-      <div className="navbarMid">
-        <div className="searchbar">
+      <div className="relative w-[40%] sm:w-[40%]">
+        <div className="searchbar flex gap-[10px] justify-center items-center">
           <Search className="searchIcon" onClick={searchHandler} />
-          <input placeholder="Search friends, posts, video..." className="searchInput" value={searchcred} onChange={onchange} />
+          <input placeholder="Search friends, posts, video..." className="searchInput text-[15px] w-[63%] sm:w-[80%]" value={searchcred} onChange={onchange} />
         </div>
         {
           showSearch &&
@@ -106,12 +106,11 @@ export default function Navbar() {
         }
       </div>
       
-      <div className="navbarRight">
+      <div className="w-[28%] sm:w-[34%] relative flex justify-end gap-[20px] pr-[20px]  items-center">
         <div className="navbarLinks">
-          <span className="navbarLink" onClick={(e) => { e.preventDefault(); navigate("/"); }}>HomePage</span>
-          <span className="navbarLink">TimeLine</span>
+          <span className="navbarLink hidden min-[990px]:block" onClick={(e) => { e.preventDefault(); navigate("/"); }}>HomePage</span>
         </div>
-        <div className="navbarIcons">
+        <div className="hidden md:flex">
           <div className="navbarIconsItem">
             <Person />
             <span className="navbarIconsBedge">1</span>
@@ -128,16 +127,16 @@ export default function Navbar() {
 
         <img onClick={() => { setModal(!modal) }} src={user.profilePicture ? pf + user.profilePicture : `${pf}profile.jpg`} alt="Person" className="navbarImg" />
 
-        <div className="navbarModalContainer">
+        <div className="navbarModalContainer ">
           {
-            modal && <div className="navbarModal">
-              <Link style={{ textDecoration: "none" }} className="navbarModalItem" to={`/profile/${user._id}/${user.name}`}>
-                Go to Profile
+            modal && <div className="navbarModal rounded-md">
+              <Link style={{ textDecoration: "none" }} className="navbarModalItem text-center" to={`/profile/${user._id}/${user.name}`}>
+                Profile
               </Link>
-              <Link className="navbarModalItem" style={{ textDecoration: "none" }} to={`/${user._id}/${user.name}/update-profile`}>
+              <Link className="navbarModalItem text-center" style={{ textDecoration: "none" }} to={`/${user._id}/${user.name}/update-profile`}>
                 Update Profile
               </Link>
-              <div className="navbarModalItem" onClick={logOutHandler}>
+              <div className="navbarModalItem text-center" onClick={logOutHandler}>
                 Log Out
               </div>
             </div>

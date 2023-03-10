@@ -6,7 +6,6 @@ import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 import { CircularProgress } from "@mui/material";
 
-
 export default function Register() {
   const context = useContext(PostContext);
   const { notify } = context;
@@ -61,18 +60,18 @@ export default function Register() {
 
 
   return (
-    <div className="registerContainer">
-      <div className="registerWrapper">
-        <div className="registerLeft">
-          <h4 className="registerLogo">
+    <div className="bg-[#e1f4fa] min-w-[100vw] min-h-[100vh] flex justify-center items-center">
+      <div className="flex flex-col sm:flex-row">
+        <div className="left flex flex-col justify-center max-[641px]:items-center sm:pl-[20px] w-[100%] sm:w-[50%]">
+          <h4 className="registerLogo text-[36px] sm:text-[55px] font-medium">
             ConnectUs
           </h4>
-          <div className="registerDesc">
+          <div className="text-[15px] sm:text-[24px] max-[641px]:text-center font-medium w-[90%] sm:w-[70%]">
             Connect with friends and the world around you on ConnectUs.
           </div>
         </div>
-        <div className="registerRight">
-          <form className="registerBox" onSubmit={handleClick}>
+        <div className="flex justify-center items-center mt-[20px] w-[100%] sm:w-[50%]">
+          <form className="gap-[20px] flex flex-col p-[20px] bg-white rounded-[10px] w-[80%]" onSubmit={handleClick}>
             <input autoComplete="on" onChange={(e) => { setName(e.target.value) }} value={name} minLength="6" required={true} className="registerInput" type="text" placeholder="Username" name="name" />
             <input autoComplete="on" onChange={(e) => { setEmail(e.target.value) }} value={email} required={true} className="registerInput" type="email" placeholder="Email" name="email" />
             {/* <input autoComplete="on" onChange={handleChange} value={cred.password} minLength="6" required={true} className="registerInput" type="password" placeholder="Password" name="password" />
@@ -88,7 +87,7 @@ export default function Register() {
             }}><CircularProgress style={{ color: "white" }} /></div> : "Continue"} </button>
             <button required={true} className="registerLogin" onClick={() => {
               navigate("/login")
-            }} type="button">Login to Your Account</button>
+            }} type="button">Login</button>
           </form>
         </div>
       </div>

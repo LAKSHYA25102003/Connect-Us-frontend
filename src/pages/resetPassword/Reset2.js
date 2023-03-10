@@ -42,6 +42,7 @@ export default function Reset2() {
             body:JSON.stringify(data)
         })
         response=await response.json();
+        console.log(response);
         if(response.success)
         {
             setProgress(false);

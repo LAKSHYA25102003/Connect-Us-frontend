@@ -104,18 +104,6 @@ export default function Share(props) {
                             <span className="shareOptionText">Photo</span>
                             <input style={{ display: "none" }} type="file" id="file" name="file" accept=".png,.jpeg,.jpg" onChange={(e) => { setFile(e.target.files[0]) }} />
                         </label>
-                        <div className="shareOption">
-                            <Label htmlColor="blue" className="shareOptionIcon" />
-                            <span className="shareOptionText">Tag</span>
-                        </div>
-                        <div className="shareOption">
-                            <Room htmlColor="green" className="shareOptionIcon" />
-                            <span className="shareOptionText">Location</span>
-                        </div>
-                        <div className="shareOption">
-                            <EmojiEmotions htmlColor="#FF33BB" className="shareOptionIcon" />
-                            <span className="shareOptionText">Feelings</span>
-                        </div>
                     </div>
                     <button className="shareButton" type="Submit">Share</button>
                 </form>
