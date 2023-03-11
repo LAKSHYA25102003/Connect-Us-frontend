@@ -15,9 +15,9 @@ import { CircularProgress } from "@mui/material";
 const RightBar = (props) => {
   const [cprogress, setcProgress] = useState(false);
   const [fprogress, setfProgress] = useState(false);
-  const context=useContext(PostContext);
-  const{of}=context;
-  const [onlineFriends,setOnlineFriends]=useState(of);
+  const context = useContext(PostContext);
+  const { of } = context;
+  const [onlineFriends, setOnlineFriends] = useState(of);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const postUser = props.postUser;
@@ -25,9 +25,9 @@ const RightBar = (props) => {
   const navigate = useNavigate();
   const [friendList, setFriendList] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setOnlineFriends(of);
-  },[of.length])
+  }, [of.length])
 
   const fetchFriends = async () => {
     const url = `${process.env.REACT_APP_BASE_URL}api/user/friends/${postUser._id}`;
@@ -116,69 +116,68 @@ const RightBar = (props) => {
   const ProfileRightBar = () => {
     return Object.keys(user).length !== 0 && (
       <div className='rightbarWrapper '>
-          {(postUser._id !== user._id) &&
-            (user.following.includes(postUser._id) ?
-              <div className="rightbarButtons">
-                <button className="rightbarFollowButton" onClick={unfollowHandler}>
-                  <span className="rightbarFollowButtonText" >{fprogress ? <div style={{
-              height
-                : "80%", display: "flex", justifyContent: "center", alignItems: "center"
-            }}><CircularProgress style={{ color: "white" }} /></div> : "Unfollow"}</span>
-                  <Remove />
-                </button>
-                <button className="rightbarFollowButton">
-                  <span className="rightbarFollowButtonText" onClick={messageClickHandler}>{cprogress ? <div style={{
-              height
-                : "80%", display: "flex", justifyContent: "center", alignItems: "center"
-            }}><CircularProgress style={{ color: "white" }} /></div> : "Chat"}</span>
-                  <Chat style={{marginLeft:"5px"}} />
-                </button>
-              </div>
-              :
+        {(postUser._id !== user._id) &&
+          (user.following.includes(postUser._id) ?
+            <div className="rightbarButtons">
+              <button className="rightbarFollowButton" onClick={unfollowHandler}>
+                <span className="rightbarFollowButtonText" >{fprogress ? <div style={{
+                  height
+                    : "80%", display: "flex", justifyContent: "center", alignItems: "center"
+                }}><CircularProgress style={{ color: "white" }} /></div> : "Unfollow"}</span>
+              </button>
               <button className="rightbarFollowButton">
-                <span className="rightbarFollowButtonText" onClick={followHandler}>{fprogress ? <div style={{
-              height
-                : "80%", display: "flex", justifyContent: "center", alignItems: "center"
-            }}><CircularProgress style={{ color: "white" }} /></div> : "Follow"}</span>
-                <Add />
-              </button>)
-          }
+                <span className="rightbarFollowButtonText" onClick={messageClickHandler}>{cprogress ? <div style={{
+                  height
+                    : "80%", display: "flex", justifyContent: "center", alignItems: "center"
+                }}><CircularProgress style={{ color: "white" }} /></div> : "Chat"}</span>
+                <Chat style={{ marginLeft: "5px" }} />
+              </button>
+            </div>
+            :
+            <button className="rightbarFollowButton">
+              <span className="rightbarFollowButtonText" onClick={followHandler}>{fprogress ? <div style={{
+                height
+                  : "80%", display: "flex", justifyContent: "center", alignItems: "center"
+              }}><CircularProgress style={{ color: "white" }} /></div> : "Follow"}</span>
+              <Add />
+            </button>)
+        }
         <h4 className="rightbarTitle">User Information</h4>
-        <div className="rightbarInfo">
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">City:</span>
-            <span className="rightbarInfoValue">{postUser.city || "City is not added"}</span>
-          </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">From(Country):</span>
-            <span className="rightbarInfoValue">{postUser.from || "Country is not added"}</span>
-          </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">{postUser.relationship || "Relationship information is not added"}</span>
-          </div>
+        <div className="grid grid-cols-3 gap-[10px]">
+          <span className="rightbarInfoKey">City</span>
+          <span className="rightbarInfoKey ml-[20px]">:</span>
+          <span className="rightbarInfoValue">{postUser.city || "City is not added"}</span>
+
+          <span className="rightbarInfoKey">From(Country)</span>
+          <span className="rightbarInfoKey ml-[20px]">:</span>
+          <span className="rightbarInfoValue">{postUser.from || "Country is not added"}</span>
+
+
+          <span className="rightbarInfoKey">Relationship</span>
+          <span className="rightbarInfoKey ml-[20px]">:</span>
+          <span className="rightbarInfoValue">{postUser.relationship || "Relationship information is not added"}</span>
         </div>
 
         <h4 className="rightbarTitle">
           Friends
         </h4>
-        <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between"}}>
-        {
-          friendList.length !== 0 ? friendList.map((friend) => {
-            return (
-              <div key={friend._id} className="rightbarFollowings" onClick={(e) => {
-                e.preventDefault();
-                navigate(`/profile/${friend._id}/${friend.name}`)
-              }}>
-                <div className="rightbarFollowing">
-                  <img className="rightbarFollowingImg" src={friend.profilePicture ? pf + friend.profilePicture : `${pf}profile.jpg`} alt="" />
-                  <span className="rightbarFollowingName">{friend.name}</span>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+          {
+            friendList.length !== 0 ? friendList.map((friend) => {
+              return (
+                <div key={friend._id} className="rightbarFollowings" onClick={(e) => {
+                  e.preventDefault();
+                  navigate(`/profile/${friend._id}/${friend.name}`)
+                }}>
+                  <div className="rightbarFollowing">
+                    <img className="rightbarFollowingImg" src={friend.profilePicture ? pf + friend.profilePicture : `${pf}profile.jpg`} alt="" />
+                    <span className="rightbarFollowingName">{friend.name}</span>
+                  </div>
                 </div>
-              </div>
-            )
-          }) :
-            <div style={{ color: "gray", fontSize: "20px", fontWeight: "500" }}>No Friends yet!</div>
-        }
+              )
+            }) :
+              <div style={{ color: "gray", fontSize: "20px", fontWeight: "500" }}>No Friends yet!</div>
+          }
         </div>
       </div>
     )
@@ -197,6 +196,7 @@ const RightBar = (props) => {
         <h4 className='rightbarTitle'>Online Friends</h4>
         <ul className="onlineFriendsList">
           {
+
             onlineFriends.map((u) => {
               return <Online key={u._id} user={u} />
             })
@@ -207,7 +207,7 @@ const RightBar = (props) => {
   }
 
   return (
-    <div className='rightbarContainer'>
+    <div className='rightbarContainer md:sticky md:top-[50px]'>
       {postUser ? <ProfileRightBar /> : <HomeRightBar />}
     </div>
   )

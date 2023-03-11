@@ -23,7 +23,7 @@ export default function Home() {
           <Sidebar />
         </div>
         <div className="w-[100%] md:w-[46%]">
-          <Feed />
+          <Feed right={false} />
         </div>
         <div className="hidden md:block w-[31%]">
           <RightBar />

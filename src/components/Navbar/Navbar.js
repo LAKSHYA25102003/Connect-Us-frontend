@@ -130,11 +130,14 @@ export default function Navbar() {
         <div className="navbarModalContainer ">
           {
             modal && <div className="navbarModal rounded-md">
-              <Link style={{ textDecoration: "none" }} className="navbarModalItem text-center" to={`/profile/${user._id}/${user.name}`}>
+              <Link style={{ textDecoration: "none" }} onClick={()=>{setModal(false)}} className="navbarModalItem text-center" to={`/profile/${user._id}/${user.name}`}>
                 Profile
               </Link>
-              <Link className="navbarModalItem text-center" style={{ textDecoration: "none" }} to={`/${user._id}/${user.name}/update-profile`}>
+              <Link className="navbarModalItem text-center" onClick={()=>{setModal(false)}} style={{ textDecoration: "none" }} to={`/${user._id}/${user.name}/update-profile`}>
                 Update Profile
+              </Link>
+              <Link className="navbarModalItem text-center" onClick={()=>{setModal(false)}} style={{ textDecoration: "none" }} to={`/messanger`}>
+                Chats
               </Link>
               <div className="navbarModalItem text-center" onClick={logOutHandler}>
                 Log Out

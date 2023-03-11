@@ -87,18 +87,18 @@ export default function Reset() {
 
     if(expired===false){
     return render&&(
-        <div className="resetContainer">
-            <div className="resetWrapper">
-                <div className="resetLeft">
-                    <h4 className="resetLogo">
+        <div className="bg-[#e1f4fa] min-w-[100vw] min-h-[100vh] flex justify-center items-center">
+            <div className="flex flex-col sm:flex-row">
+                <div className="left flex flex-col justify-center max-[641px]:items-center sm:pl-[20px] w-[100%] sm:w-[50%]">
+                    <h4 className="resetLogo text-[36px] sm:text-[55px] font-medium">
                         ConnectUs
                     </h4>
-                    <div className="resetDesc">
+                    <div className="text-[15px] sm:text-[24px] max-[641px]:text-center font-medium w-[90%] sm:w-[70%]">
                         Connect with friends and the world around you on ConnectUs.
                     </div>
                 </div>
-                <div className="resetRight">
-                    <form className="resetBox" onSubmit={submitPassword}>
+                <div className="flex justify-center items-center mt-[20px] w-[100%] sm:w-[50%]">
+                    <form className="gap-[20px] flex flex-col p-[20px] bg-white rounded-[10px] w-[80%]" onSubmit={submitPassword}>
                         <input value={password} autoComplete="on" minLength="6" required={true} className="resetInput" type="password" placeholder="Reset Password" name="password" onChange={(e)=>{setPassword(e.target.value)}} />
                         <input value={confirmPassword} autoComplete="on" minLength="6" required={true} className="resetInput" type="text" placeholder="Confirm Reset Password" name="confirmPassword" onChange={(e)=>{setConfirmPassword(e.target.value)}} />
                         {

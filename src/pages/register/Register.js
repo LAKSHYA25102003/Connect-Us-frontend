@@ -58,7 +58,6 @@ export default function Register() {
     setProgress(false);
   }
 
-
   return (
     <div className="bg-[#e1f4fa] min-w-[100vw] min-h-[100vh] flex justify-center items-center">
       <div className="flex flex-col sm:flex-row">

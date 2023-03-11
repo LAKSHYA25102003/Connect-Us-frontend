@@ -95,19 +95,19 @@ export default function Update() {
     }
 
     return render && (
-        <div className="updateContainer">
-            <div className="updateWrapper">
-                <div className="updateLeft">
-                    <h4 className="updateLogo">
+        <div className="bg-[#e1f4fa] min-w-[100vw] min-h-[100vh] flex justify-center items-center">
+            <div className="flex flex-col sm:flex-row">
+                <div className="left flex flex-col justify-center max-[641px]:items-center sm:pl-[20px] w-[100%] sm:w-[50%]">
+                    <h4 className="updateLogo text-[36px] sm:text-[55px] font-medium">
                         ConnectUs
                     </h4>
-                    <div className="updateDesc">
+                    <div className="text-[15px] sm:text-[24px] max-[641px]:text-center font-medium w-[90%] sm:w-[70%]">
                         Connect with friends and the world around you on ConnectUs.
                     </div>
                 </div>
-                <div className="updateRight">
+                <div className="flex flex-col justify-center items-center mt-[20px] w-[100%] sm:w-[50%] ">
                     <h4 className="updateTitle">Update Your Profile</h4>
-                    <form className="updateBox" onSubmit={submitHandler}>
+                    <form className="gap-[10px] flex flex-col p-[20px] bg-white rounded-[10px] w-[90%] mb-[15px]" onSubmit={submitHandler}>
                         <div className="updateBoxItem">
                             <label htmlFor="name">Name:</label>
                             <input value={profileCred.name} onChange={onChangeInput} autoComplete="on" className="updateInput" type="text" placeholder="Username" name="name" id="name" />
