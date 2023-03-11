@@ -15,6 +15,7 @@ export default function Conversation(props) {
     if(response.success==true)
     {
       setFriend(response.user);
+      
     }
   }
 
@@ -24,7 +25,7 @@ export default function Conversation(props) {
 
   const pf=process.env.REACT_APP_PUBLLC_FOLDER;
   return friend&&(
-    <div className="conversation">
+    <div className="conversation" onClick={()=>{props.setfr(friend);}}>
       <img className="conversationImg" src={friend.profilePicture?pf+friend.profilePicture:`${pf}profile.jpg`} alt="" />
       <span className="conversationName">{friend.name}</span>
     </div>

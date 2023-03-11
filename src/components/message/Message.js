@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MoreVert, NavigateNextTwoTone } from "@mui/icons-material"
 
-export default function Message({ message, own,isMessageDeleted }) {
+export default function Message({ message, own, isMessageDeleted }) {
   const [sender, setSender] = useState(null);
-  const [showDelete,setshowDelete]=useState(false);
+  const [showDelete, setshowDelete] = useState(false);
   useEffect(() => {
     const getUser = async () => {
       const url = `${process.env.REACT_APP_BASE_URL}api/user/get-user-by-id/${message.sender}`
@@ -25,10 +25,10 @@ export default function Message({ message, own,isMessageDeleted }) {
 
   const pf = process.env.REACT_APP_PUBLLC_FOLDER;
 
-  const deleteMessage=async ()=>{
-    const url=`${process.env.REACT_APP_BASE_URL}api/message/delete/message/${message._id}`
-    let response=await fetch(url,{
-      method:"DELETE",
+  const deleteMessage = async () => {
+    const url = `${process.env.REACT_APP_BASE_URL}api/message/delete/message/${message._id}`
+    let response = await fetch(url, {
+      method: "DELETE",
       headers: {
         'Content-Type': "application/json",
         'auth-token': localStorage.getItem("auth-token"),
@@ -42,19 +42,23 @@ export default function Message({ message, own,isMessageDeleted }) {
   }
 
   return (
-    <div className={own ? "message own" : "message"}>
-      <div className="messageTop" style={{display:"flex",cursor:"pointer",alignItems:"center"}}>
-        <Link to={`/profile/${sender&&sender._id}/${sender&&sender.name}`}>
-          <img className="messageImg" src={sender && sender.profilePicture ? pf + sender.profilePicture : `${pf}profile.jpg`} alt="" />
-        </Link>
-        <p className="messageTopText" >{message.text}</p>
-        <MoreVert style={{fontSize:"15px"}} onClick={()=>{setshowDelete(!showDelete)}}/>
+    <div className="flex relative">
+      <div className={own?"flex items-start justify-end":"flex items-start justify-start"}>
+        {/* <Link to={`/profile/${sender && sender._id}/${sender && sender.name}`}>
+          <img className="rounded-[50%] w-[30px] h-[30px]" src={sender && sender.profilePicture ? pf + sender.profilePicture : `${pf}profile.jpg`} alt="" />
+        </Link> */}
+        <div className={own?"flex flex-col max-w-[80%] min-w-[10%]":"flex flex-col max-w-[80%] min-w-[10%]"}>
+          <div className="w-[100%] text-[15px] text-white">
+            <p className={own?"colown rounded-md w-[100%] px-[10px] break-all":"break-all coloth rounded-md w-[100%] px-[10px]"} >{message.text}</p>
+          </div>
+          <div className={own ? "flex justify-end text-[10px]" : "flex justify-start text-[10px]"}>
+            {format(message.createdAt)}
+          </div>
+        </div>
+        <MoreVert style={{ fontSize: "15px",cursor:"pointer" }} onClick={() => { setshowDelete(!showDelete) }} />
         {
-          showDelete&&<button style={{display:"flex",alignItems:"center",justifyContent:"center",backgroundColor:"white",color:"black",borderRadius:"5px",outline:"none",cursor:"pointer"}} onClick={()=>{deleteMessage()}}>Delete</button>
+          showDelete && <button className="cursor-pointer text-[13px] p-[5px] absolute top-[15px] right-0 hover:font-medium" style={{ display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "white", color: "black", borderRadius: "5px", outline: "none", cursor: "pointer" }} onClick={() => { deleteMessage() }}>Delete</button>
         }
-      </div>
-      <div className="messageBottom">
-        {format(message.createdAt)}
       </div>
     </div>
   )

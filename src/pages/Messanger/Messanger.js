@@ -6,7 +6,7 @@ import Chatonline from "../../components/ChatOnline/Chatonline";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import  { getUser } from "../../redux/user";
+import { getUser } from "../../redux/user";
 import { useDispatch } from "react-redux/es/exports";
 import { useRef } from "react"
 import { io } from "socket.io-client"
@@ -24,17 +24,17 @@ export default function Messanger() {
     const socket = useRef()
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
+    const [fr,setFr] = useState("");
 
-    const isMessageDeleted=()=>
-    {
+    const isMessageDeleted = () => {
         getMessages();
-        return ;
+        return;
     }
-    
+
     useEffect(() => {
         arrivalMessage && currChat?.members.includes(arrivalMessage.sender) &&
             setMessages((prev) => [...prev, arrivalMessage]);
-    }, [arrivalMessage,currChat])
+    }, [arrivalMessage, currChat])
 
     // to send some thing to server
     useEffect(() => {
@@ -99,7 +99,7 @@ export default function Messanger() {
 
     useEffect(() => {
         currChat && getMessages();
-    }, [currChat,messages.length])
+    }, [currChat, messages.length])
 
     // to scroll automatically
     useEffect(() => {
@@ -142,50 +142,53 @@ export default function Messanger() {
     return conversations && (
         <div>
             <Navbar />
-            <div className="messangerContainer">
-                <div className="chatMenu">
+            {currChat&&<div className="bg-white z-50 w-[100%] left-0 md:w-[45%] md:left-[25%] h-[50px] text-[20px] py-[10px] font-medium hover:bg-[#9dd1e181]  fixed text-black text-center cursor-pointer top-[50px] " onClick={()=>{navigate(`/profile/${fr._id}/${fr.name}`)}}>{fr.name}</div>}
+            <div className="messangerContainer w-[100%]">
+                <div className={!currChat ? "chatMenu  w-[40%] md:w-[25%]" : "hidden md:block md:w-[25%]"}>
                     <div className="chatMenuWrapper">
                         <input placeholder="Search for friends" className="chatMenuInput" />
                         {
                             conversations.map((c) => {
                                 return (
                                     <div key={c._id} onClick={() => { setCurrChat(c) }}>
-                                        <Conversation conversation={c} currUser={currUser} />
+                                        <Conversation setfr={setFr} conversation={c} currUser={currUser} />
                                     </div>
                                 )
                             })
                         }
                     </div>
                 </div>
-                <div className="chatBox">
+                <div className={!currChat ? "chatBox w-[60%] md:w-[45%]" : "chatBox w-[100%] md:w-[45%]"}>
                     {
                         currChat ?
-                            <div className="chatBoxWrapper">
-                                <div className="chatBoxTop">
-                                    {
-                                        messages ? messages.map((m) => {
-                                            return (
-                                                <div key={m._id} ref={scrollRef}>
-                                                    <Message message={m} own={m.sender === currUser._id} isMessageDeleted={isMessageDeleted} />
-                                                </div>
-                                            )
-                                        }) :
-                                            <div className="noConversation">Loading..</div>
-                                    }
-                                </div>
-                                <div className="chatBoxBottom">
-                                    <textarea value={newMessage} onChange={(e) => { setNewMessage(e.target.value) }} className="chatMessageInput" placeholder="Write something...">
+                            <div className="">
+                                <div className="p-[10px] w-[100%]">
+                                    <div className="chatBoxTop gap-[20px]">
+                                        {
+                                            messages ? messages.map((m) => {
+                                                return (
+                                                    <div className={(m.sender === currUser._id) ? "flex justify-end w-[100%]" : "flex w-[100%]"} key={m._id} ref={scrollRef}>
+                                                        <Message message={m} own={m.sender === currUser._id} isMessageDeleted={isMessageDeleted} />
+                                                    </div>
+                                                )
+                                            }) :
+                                                <div className="noConversation">Loading..</div>
+                                        }
+                                    </div>
+                                    <div className="chatBoxBottom ">
+                                        <textarea value={newMessage} onChange={(e) => { setNewMessage(e.target.value) }} className="chatMessageInput w-[70%] md:w[80%]" placeholder="Write something...">
 
-                                    </textarea>
-                                    <button className="chatSubmitButton" onClick={handleSend}>
-                                        Send
-                                    </button>
+                                        </textarea>
+                                        <button className="chatSubmitButton" onClick={handleSend}>
+                                            Send
+                                        </button>
+                                    </div>
                                 </div>
                             </div> :
-                            <span className="noConversation">Start conversation with your friends...</span>
+                            <span className="noConversation text-[24px] md:text-[36px]">Start conversation with your friends...</span>
                     }
                 </div>
-                <div className="chatOnline">
+                <div className="hidden md:flex md:w-[30%]">
                     <div className="chatOnlineWrapper">
                         <Chatonline onlineUsers={onlineUsers} currUser={currUser} setCurrChat={setCurrChat} />
                     </div>
