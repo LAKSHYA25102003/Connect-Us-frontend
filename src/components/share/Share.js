@@ -97,7 +97,7 @@ export default function Share(props) {
                         <Cancel className="shareImgCancel" onClick={() => { setFile(null) }} />
                     </div>
                 }
-                <form className="shareBottom" onSubmit={submitHandler}>
+                <form className="shareBottom flex justify-between" onSubmit={submitHandler}>
                     <div className="shareOptions">
                         <label htmlFor="file" className="shareOption">
                             <PermMedia htmlColor="orange" className="shareOptionIcon" />

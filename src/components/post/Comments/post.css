@@ -6,20 +6,7 @@
   -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.63);
   -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.63);
   box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.63);
-  /* overflow-y: auto; */
 }
-
-/* ::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track{
-    background-color: rgb(210, 200, 200);
-}
-
-::-webkit-scrollbar-thumb{
-    background-color: gray;
-} */
 
 .postWrapper {
   padding: 15px;

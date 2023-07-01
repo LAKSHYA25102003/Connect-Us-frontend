@@ -39,6 +39,7 @@ export default function Login() {
     response = await response.json();
     if (response.success === true) {
       localStorage.setItem("auth-token", response.token);
+      localStorage.setItem("user",JSON.stringify(response.user));
       navigate("/");
       loginSuccess();
       setProgress(false);

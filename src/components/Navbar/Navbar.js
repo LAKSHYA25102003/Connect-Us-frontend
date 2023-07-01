@@ -35,6 +35,7 @@ export default function Navbar() {
   const logOutHandler = (e) => {
     e.preventDefault();
     localStorage.removeItem("auth-token");
+    localStorage.removeItem("user");
     navigate("/login");
     logoutSuccess();
   }

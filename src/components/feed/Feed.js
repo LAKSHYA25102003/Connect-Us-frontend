@@ -12,6 +12,7 @@ import { specificUserPosts } from '../../redux/post';
 export default function Feed(props) {
   const user = useSelector(state => state.user.user);
 
+
   const postCreated = () => {
     !props.profileId ? dispatch(getPosts()) : dispatch(specificUserPosts(props.profileId));
   }
@@ -23,8 +24,7 @@ export default function Feed(props) {
 
   const Posts = useSelector(state => state.post.posts);
   let flag=false;
-  console.log(props);
-
+  
   return (
     <div className='feedContainer'>
       {

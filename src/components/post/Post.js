@@ -9,10 +9,13 @@ import { useDispatch } from "react-redux";
 import { getUser } from "../../redux/user";
 import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
+import Comments from "./Comments/Comments";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material";
 
 export default function Post(props) {
-    const context=useContext(PostContext)
-    const {deletePostFn}=context;
+    const context = useContext(PostContext)
+    const { deletePostFn } = context;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const pf = process.env.REACT_APP_PUBLLC_FOLDER;
@@ -20,6 +23,8 @@ export default function Post(props) {
     const [postUser, setPostUser] = useState({});
     const [displayPostEdit, setDisplayPostEdit] = useState(false);
     const currUser = useSelector(state => state.user.user);
+    const [showComments, setShowComments] = useState(false);
+   
 
     const fetchPostUser = async () => {
         const url = `${process.env.REACT_APP_BASE_URL}api/user/get-user-by-id/${props.post.userId}`
@@ -35,9 +40,7 @@ export default function Post(props) {
         }
     }
 
-    useEffect(() => {
-        setIsLike(post.likes.includes(currUser._id));
-    }, [])
+
 
     useEffect(() => {
         fetchPostUser();
@@ -47,12 +50,13 @@ export default function Post(props) {
         dispatch(getUser());
     }, [])
 
-    const [isLike, setIsLike] = useState();
+    const [isLike, setIsLike] = useState(post.likes.includes(currUser._id));
     const [like, setLike] = useState(post.likes.length)
 
 
     const likeHandler = async () => {
         isLike ? setLike(like - 1) : setLike(like + 1);
+        setIsLike(!isLike);
         const url = `${process.env.REACT_APP_BASE_URL}api/user/post/${post._id}/like`;
         let response = await fetch(url, {
             method: 'PUT',
@@ -62,13 +66,15 @@ export default function Post(props) {
             },
         })
         response = await response.json();
-        setIsLike(!isLike);
     }
 
     const linkHandler = (e) => {
         e.preventDefault();
         navigate(`/profile/${postUser._id}/${postUser.name}`);
     }
+
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
         <div className="post">
@@ -82,11 +88,11 @@ export default function Post(props) {
                         <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
-                        {postUser._id===currUser._id&&<MoreVert onClick={()=>{setDisplayPostEdit(!displayPostEdit)}} className="verticalDot"/>}
+                        {postUser._id === currUser._id && <MoreVert onClick={() => { setDisplayPostEdit(!displayPostEdit) }} className="verticalDot" />}
                         {
-                            displayPostEdit&&<div className="postEditContainer">
+                            displayPostEdit && <div className="postEditContainer">
                                 <div className="postEdit">
-                                    <div className="postEditItem" onClick={()=>{deletePostFn(post._id)}}>Delete Post</div>
+                                    <div className="postEditItem" onClick={() => { deletePostFn(post._id) }}>Delete Post</div>
                                     {/* <div className="postEditItem">Edit Post</div> */}
                                 </div>
                             </div>
@@ -105,11 +111,12 @@ export default function Post(props) {
                         <img className="postLikeIcon" src="/assets/like.png" onClick={likeHandler} alt="" />
                         <span className="postLikeCounter">{like} Likes </span>
                     </div>
-                    <div className="postBottomRight">
+                    <div onClick={() => { setShowComments(true);  }}  className="postBottomRight">
                         <span className="postCommentCounter">{post.comment} Comments</span>
                     </div>
                 </div>
             </div>
+            <Comments  post={post} fullScreen={fullScreen} showComments={showComments} setShowComments={setShowComments} />
         </div>
     )
 }

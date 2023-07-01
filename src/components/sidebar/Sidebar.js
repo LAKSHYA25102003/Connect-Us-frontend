@@ -70,8 +70,8 @@ export default function Sidebar() {
         <hr className='sidebarHr' />
         <ul className='sidebarFriendsList'>
           {
-            Users.map((u)=>{
-              return <Friends key={u.id} user={u}/>
+            JSON.parse(localStorage.getItem("user")).following.map((u,index)=>{
+              return <Friends key={index} user={u}/>
             })
           }
         </ul>
