@@ -6,7 +6,7 @@ import Chatonline from "../../components/ChatOnline/Chatonline";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getUser } from "../../redux/user";
+
 import { useDispatch } from "react-redux/es/exports";
 import { useRef } from "react"
 import { io } from "socket.io-client"
@@ -25,6 +25,7 @@ export default function Messanger() {
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [fr,setFr] = useState("");
+    const [searchKeyword,setSearchKeyword] = useState("");
 
     const isMessageDeleted = () => {
         getMessages();
@@ -59,7 +60,6 @@ export default function Messanger() {
         }
         else {
             socket.current = io(`${process.env.REACT_APP_SOCKET_URL}`)
-            dispatch(getUser());
             socket.current.on("getMessage", (data) => {
                 setArrivalMessage({
                     sender: data.senderId,
@@ -139,19 +139,23 @@ export default function Messanger() {
 
         }
     }
+
+
+
+
     return conversations && (
         <div>
             <Navbar />
-            {currChat&&<div className="bg-white z-50 w-[100%] left-0 md:w-[45%] md:left-[25%] h-[50px] text-[20px] py-[10px] font-medium hover:bg-[#9dd1e181]  fixed text-black text-center cursor-pointer top-[50px] " onClick={()=>{navigate(`/profile/${fr._id}/${fr.name}`)}}>{fr.name}</div>}
+            {currChat&&<div className="z-50 w-[100%] left-0 md:w-[45%] md:left-[25%] h-[50px] text-[20px] py-[10px] font-medium bg-[#9dd1e181]  fixed text-black text-center cursor-pointer top-[50px] " onClick={()=>{navigate(`/profile/${fr._id}/${fr.name}`)}}>{fr.name}</div>}
             <div className="messangerContainer w-[100%]">
                 <div className={!currChat ? "chatMenu  w-[40%] md:w-[25%]" : "hidden md:block md:w-[25%]"}>
                     <div className="chatMenuWrapper">
-                        <input placeholder="Search for friends" className="chatMenuInput" />
+                        <input value={searchKeyword} onChange={(e)=>{setSearchKeyword(e.target.value)}} placeholder="Search for friends" className="chatMenuInput" />
                         {
                             conversations.map((c) => {
                                 return (
                                     <div key={c._id} onClick={() => { setCurrChat(c) }}>
-                                        <Conversation setfr={setFr} conversation={c} currUser={currUser} />
+                                        <Conversation searchKeyword={searchKeyword} setfr={setFr} conversation={c} currUser={currUser} />
                                     </div>
                                 )
                             })

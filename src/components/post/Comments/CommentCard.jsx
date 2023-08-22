@@ -6,7 +6,6 @@ import { format } from "timeago.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getUser } from "../../../redux/user";
 import { useContext } from "react";
 import PostContext from "../../../Context/post/PostContext";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -22,9 +21,7 @@ export default function CommentCard({ comment }) {
   const [displayPostEdit, setDisplayPostEdit] = useState(false);
   const currUser = useSelector((state) => state.user.user);
 
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
+
 
   const linkHandler = (e) => {
     e.preventDefault();

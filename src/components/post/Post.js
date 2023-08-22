@@ -6,7 +6,7 @@ import { format } from "timeago.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getUser } from "../../redux/user";
+
 import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 import Comments from "./Comments/Comments";
@@ -46,9 +46,7 @@ export default function Post(props) {
         fetchPostUser();
     }, [])
 
-    useEffect(() => {
-        dispatch(getUser());
-    }, [])
+   
 
     const [isLike, setIsLike] = useState(post.likes.includes(currUser._id));
     const [like, setLike] = useState(post.likes.length)

@@ -6,8 +6,11 @@ import { useContext } from "react";
 import PostContext from "../../Context/post/PostContext";
 import { CircularProgress } from "@mui/material";
 import { useState } from "react";
+import { fetchUserSuccess } from "../../redux/user/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
+  const dispatch=useDispatch();
   const [progress, setProgress] = useState(false);
   const context = useContext(PostContext);
   const { loginSuccess, loginFail, ServerError } = context;
@@ -39,7 +42,7 @@ export default function Login() {
     response = await response.json();
     if (response.success === true) {
       localStorage.setItem("auth-token", response.token);
-      localStorage.setItem("user",JSON.stringify(response.user));
+      dispatch(fetchUserSuccess(response.user));
       navigate("/");
       loginSuccess();
       setProgress(false);

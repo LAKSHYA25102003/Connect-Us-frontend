@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { getUser } from "../../redux/user"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -22,15 +21,7 @@ export default function Navbar() {
   const user = useSelector(state => state.user.user);
   const [searchResult, setSearchResult] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
-  
-  useEffect(() => {
-    if (localStorage.getItem("auth-token")) {
-      dispatch(getUser());
-    }
-    else {
-      navigate("/login");
-    }
-  }, [])
+
 
   const logOutHandler = (e) => {
     e.preventDefault();

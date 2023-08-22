@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/exports";
 import { useState } from "react";
-import { getUser } from "../../redux/user";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
@@ -23,10 +22,7 @@ export default function Share(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem("auth-token")) {
-            dispatch(getUser());
-        }
-        else {
+        if (!localStorage.getItem("auth-token")) {
             navigate("/login");
         }
     }, [])
@@ -97,7 +93,7 @@ export default function Share(props) {
                         <Cancel className="shareImgCancel" onClick={() => { setFile(null) }} />
                     </div>
                 }
-                <form className="shareBottom flex justify-between" onSubmit={submitHandler}>
+                <form className=" flex justify-between items-center mt-2" onSubmit={submitHandler}>
                     <div className="shareOptions">
                         <label htmlFor="file" className="shareOption">
                             <PermMedia htmlColor="orange" className="shareOptionIcon" />

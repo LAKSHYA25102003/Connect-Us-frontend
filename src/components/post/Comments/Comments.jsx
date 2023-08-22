@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import "./post.css";
 import { MoreVert, NavigateNextTwoTone } from "@mui/icons-material";
-import { getUser } from "../../../redux/user";
+
 import { format } from "timeago.js";
 import { useContext } from "react";
 import PostContext from "../../../Context/post/PostContext";
@@ -74,9 +74,7 @@ export default function Comments({
     fetchPostUser();
   }, []);
 
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
+
 
   useEffect(() => {}, [allComments]);
 

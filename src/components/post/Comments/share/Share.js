@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/exports";
 import { useState } from "react";
-import { getUser } from "../../../../redux/user";
 import { Link } from "react-router-dom";
 
 
@@ -18,10 +17,7 @@ export default function Share({postId,postComment}) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem("auth-token")) {
-            dispatch(getUser());
-        }
-        else {
+        if (!localStorage.getItem("auth-token")) {
             navigate("/login");
         }
     }, [])

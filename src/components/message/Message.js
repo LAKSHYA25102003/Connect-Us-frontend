@@ -47,9 +47,9 @@ export default function Message({ message, own, isMessageDeleted }) {
         {/* <Link to={`/profile/${sender && sender._id}/${sender && sender.name}`}>
           <img className="rounded-[50%] w-[30px] h-[30px]" src={sender && sender.profilePicture ? pf + sender.profilePicture : `${pf}profile.jpg`} alt="" />
         </Link> */}
-        <div className={own?"flex flex-col max-w-[80%] min-w-[10%]":"flex flex-col max-w-[80%] min-w-[10%]"}>
+        <div className={own?"flex flex-col max-w-[80%] ":"flex flex-col max-w-[80%] "}>
           <div className="w-[100%] text-[15px] text-white">
-            <p className={own?"colown rounded-md w-[100%] px-[10px] break-all":"break-all coloth rounded-md w-[100%] px-[10px]"} >{message.text}</p>
+            <p className={own?"colown rounded-md w-[100%] px-[10px] break-normal":"break-normal coloth rounded-md w-[100%] px-[10px]"} >{message.text}</p>
           </div>
           <div className={own ? "flex justify-end text-[10px]" : "flex justify-start text-[10px]"}>
             {format(message.createdAt)}
