@@ -52,12 +52,12 @@ export default function CommentCard({ comment }) {
           </div>
           <div className="postTopRight">
             {comment.user._id === currUser._id && (
-              <MoreVert className="verticalDot" />
+              <MoreVert onClick={()=>{setDisplayPostEdit(!displayPostEdit)}} className="verticalDot" />
             )}
             {displayPostEdit && (
               <div className="postEditContainer">
                 <div className="postEdit">
-                  <div className="postEditItem">Delete Comment</div>
+                  <div className="underline-none p-2 cursor-pointer">Delete Comment</div>
                 </div>
               </div>
             )}

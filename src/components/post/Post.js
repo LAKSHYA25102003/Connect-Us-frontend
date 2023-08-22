@@ -16,7 +16,6 @@ import { useTheme } from "@mui/material";
 export default function Post(props) {
     const context = useContext(PostContext)
     const { deletePostFn } = context;
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const pf = process.env.REACT_APP_PUBLLC_FOLDER;
     const { post } = props;

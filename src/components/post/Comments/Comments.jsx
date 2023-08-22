@@ -61,7 +61,7 @@ export default function Comments({
 
       response = await response.json();
       if (response.success) {
-        setAllComments([response.comment,...allComments]);
+        setAllComments([response.comment, ...allComments]);
         setDesc({ desc: "" });
       }
     } catch (error) {
@@ -73,8 +73,6 @@ export default function Comments({
   useEffect(() => {
     fetchPostUser();
   }, []);
-
-
 
   useEffect(() => {}, [allComments]);
 
@@ -111,7 +109,12 @@ export default function Comments({
         aria-labelledby="responsive-dialog-title"
         className="md:mr-[150px] overflow-y-auto"
       >
-        <div onClick={()=>{setShowComments(false)}} className="flex justify-end mt-3 mr-3 cursor-pointer">
+        <div
+          onClick={() => {
+            setShowComments(false);
+          }}
+          className="flex justify-end mt-3 mr-3 cursor-pointer"
+        >
           <CloseIcon />
         </div>
         <DialogContent
@@ -123,7 +126,7 @@ export default function Comments({
             gap: "20px",
           }}
         >
-          <div className="post">
+          <div style={{ marginTop: "0px" }} className="post">
             <div className="postWrapper">
               <div className="postTop">
                 <div className="postTopLeft">
@@ -199,12 +202,16 @@ export default function Comments({
           <div>
             <Share postComment={postComment} postId={post._id} />
           </div>
-          <div className="flex flex-col gap-3">
-            <h3 className="pl-2">All Comments</h3>
-            {allComments.map((comment, index) => {
-              return <CommentCard comment={comment} key={index} />;
-            })}
-          </div>
+          {allComments.length > 0 ? (
+            <div className="flex flex-col gap-3">
+              <h3 className="pl-2">All Comments</h3>
+              {allComments.map((comment, index) => {
+                return <CommentCard comment={comment} key={index} />;
+              })}
+            </div>
+          ) : (
+            <h3 className="pl-2">No comments yet</h3>
+          )}
         </DialogContent>
       </Dialog>
     </div>
