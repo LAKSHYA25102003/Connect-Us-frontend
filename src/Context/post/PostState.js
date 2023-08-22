@@ -1,6 +1,6 @@
 import PostContext from "./PostContext";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../redux/post";
+import { deletePost } from "../../redux/post/postAction";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";

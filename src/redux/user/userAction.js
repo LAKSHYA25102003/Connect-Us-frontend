@@ -1,5 +1,5 @@
 import { fetchUserLoading, fetchUserSuccess, fetchUserFail } from "./userSlice";
-import { useSelector } from "react-redux";
+
 
 export const getUser = () => async (dispatch) => {
   try {

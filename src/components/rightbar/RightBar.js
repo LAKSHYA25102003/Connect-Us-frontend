@@ -26,6 +26,7 @@ const RightBar = (props) => {
   const [isFriend, setIsFriend] = useState(false);
 
   useEffect(() => {
+    setIsFriend(false);
     if (postUser) {
       for (let i = 0; i < user.following.length; i++) {
         if (user.following[i]._id === postUser._id) {
