@@ -7,6 +7,7 @@ import { useSelector } from "react-redux/es/exports";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { addPost } from "../../redux/post/postAction";
+import toast from "react-hot-toast";
 
 import axios from "axios";
 
@@ -58,6 +59,7 @@ export default function Share(props) {
         }
 
         else {
+            const toastID=toast.loading("Sharing...");
             const url = `${process.env.REACT_APP_BASE_URL}api/user/post`;
             let response = await fetch(url, {
                 method: 'POST',
@@ -72,6 +74,13 @@ export default function Share(props) {
                 setDesc({ desc: "" });
                 props.postCreated();
                 dispatch(addPost(response.post));
+                toast.dismiss(toastID);
+                toast.success("Shared Successfully");
+            }
+            else
+            {
+                toast.dismiss(toastID);
+                toast.error("Some error occurred");
             }
         }
 

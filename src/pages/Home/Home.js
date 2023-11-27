@@ -4,16 +4,23 @@ import Feed from "../../components/feed/Feed";
 import RightBar from "../../components/rightbar/RightBar";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "./home.css";
+import { getUser } from "../../redux/user/userAction";
 
 export default function Home() {
   const navigate = useNavigate();
-
+  const dispatch=useDispatch();
   useEffect(()=>{
     if(!localStorage.getItem("auth-token"))
     {
       navigate("/login");
     }
+    else
+    {
+      dispatch(getUser());
+    }
+
   },[])
 
   if (localStorage.getItem("auth-token"))

@@ -10,7 +10,6 @@ import { specificUserPosts } from "../../redux/post/postAction";
 
 export default function Feed(props) {
   const user = useSelector((state) => state.user.user);
-
   const postCreated = () => {
     !props.profileId
       ? dispatch(getPosts())
@@ -18,7 +17,7 @@ export default function Feed(props) {
   };
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     !props.profileId
       ? dispatch(getPosts())

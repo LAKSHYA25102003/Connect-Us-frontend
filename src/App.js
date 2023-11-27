@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Reset2 from "./pages/resetPassword/Reset2";
 import Confirmation_page from "./pages/resetPassword/Confirmation_page";
 import SetPassword from "./pages/setPassword/setPassword.js";
+import { Toaster } from "react-hot-toast";
 
 import {
   BrowserRouter,
@@ -24,6 +25,7 @@ function App() {
   return (
     <UserState>
       <PostState>
+        <Toaster/>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />}></Route>

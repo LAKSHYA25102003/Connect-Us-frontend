@@ -8,7 +8,6 @@ import {
   Chat,
 } from '@mui/icons-material'
 
-
 export default function Sidebar() {
   const navigate=useNavigate();
   const chatClickHandler=(e)=>{

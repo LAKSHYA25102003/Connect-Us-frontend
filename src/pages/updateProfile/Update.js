@@ -100,6 +100,7 @@ export default function Update() {
     if (response.success === true) {
       profileUpdated();
       navigate("/");
+      console.log(response);
       dispatch(updateUser(response.user));
     } else {
       ServerError();
