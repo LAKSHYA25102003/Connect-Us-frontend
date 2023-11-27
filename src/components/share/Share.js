@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/exports";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { addPost } from "../../redux/post/postAction";
 
 import axios from "axios";
 
@@ -30,7 +31,6 @@ export default function Share(props) {
 
 
     const user = useSelector(state => state.user.user);
-
     const submitHandler = async (e) => {
         e.preventDefault();
         const newPost = {
@@ -56,6 +56,7 @@ export default function Share(props) {
         if (desc.desc === "" && !file) {
             console.log("there is nothing to post\n");
         }
+
         else {
             const url = `${process.env.REACT_APP_BASE_URL}api/user/post`;
             let response = await fetch(url, {
@@ -66,12 +67,11 @@ export default function Share(props) {
                 },
                 body: JSON.stringify(newPost)
             })
-
             response = await response.json();
             if (response.success === true) {
                 setDesc({ desc: "" });
                 props.postCreated();
-
+                dispatch(addPost(response.post));
             }
         }
 

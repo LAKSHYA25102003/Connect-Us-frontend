@@ -18,6 +18,7 @@ export default function Feed(props) {
   };
 
   const dispatch = useDispatch();
+  
   useEffect(() => {
     !props.profileId
       ? dispatch(getPosts())

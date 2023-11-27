@@ -31,6 +31,16 @@ export const specificUserPosts = (id) => async (dispatch, getState) => {
   dispatch(fetchPostsSuccess(response.posts));
 };
 
+export const addPost = (newPost) => async (dispatch,getState) => {
+  try {
+    const {post} = getState();
+    const postsCopy=[...post.posts,newPost];
+    dispatch(fetchPostsSuccess(postsCopy));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deletePost = (id) => async (dispatch, getState) => {
   const currentPosts = getState().post.posts;
   const updatedPosts = currentPosts.filter((post) => {

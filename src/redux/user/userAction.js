@@ -1,6 +1,5 @@
 import { fetchUserLoading, fetchUserSuccess, fetchUserFail } from "./userSlice";
 
-
 export const getUser = () => async (dispatch) => {
   try {
     dispatch(fetchUserLoading());
@@ -17,6 +16,14 @@ export const getUser = () => async (dispatch) => {
     if (response.success) {
       dispatch(fetchUserSuccess(response.user));
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUser = (savedUser) => async (dispatch) => {
+  try {
+    dispatch(fetchUserSuccess(savedUser));
   } catch (error) {
     console.log(error);
   }
@@ -41,7 +48,7 @@ export const followUser =
         console.log("clicked");
         const updatedUser = {
           ...currentUser,
-          following: [...currentUser.following,postUser]
+          following: [...currentUser.following, postUser],
         };
         dispatch(fetchUserSuccess(updatedUser));
       }
@@ -69,7 +76,9 @@ export const unfollowUser =
         const currentUser = getState().user.user;
         const updatedUser = {
           ...currentUser,
-          following: currentUser.following.filter((obj) => obj._id !== postUser._id),
+          following: currentUser.following.filter(
+            (obj) => obj._id !== postUser._id
+          ),
         };
         dispatch(fetchUserSuccess(updatedUser));
       }

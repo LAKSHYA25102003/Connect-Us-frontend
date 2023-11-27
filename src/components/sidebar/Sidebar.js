@@ -6,13 +6,6 @@ import { useSelector } from 'react-redux';
 import {
   RssFeed,
   Chat,
-  PlayCircleFilledOutlined,
-  Group,
-  Bookmark,
-  HelpOutline,
-  WorkOutline,
-  Event,
-  School
 } from '@mui/icons-material'
 
 

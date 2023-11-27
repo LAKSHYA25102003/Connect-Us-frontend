@@ -54,6 +54,7 @@ export default function Navbar() {
     }
   };
 
+
   return (
     <div className="navbarContainer flex w-[100%] py-[10px] ">
       <div className="w-[32%] sm:w-[26%]">
@@ -189,7 +190,6 @@ export default function Navbar() {
             <span className="navbarIconsBedge">1</span>
           </div>
         </div>
-
         <img
           onClick={() => {
             setModal(!modal);
