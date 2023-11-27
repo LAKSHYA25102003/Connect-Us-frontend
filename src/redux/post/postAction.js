@@ -46,10 +46,5 @@ export const deletePost = (id) => async (dispatch, getState) => {
   const updatedPosts = currentPosts.filter((post) => {
     return post._id !== id;
   });
-
-  updatedPosts.sort((x, y) => {
-    return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1;
-  });
-
   dispatch(fetchPostsSuccess(updatedPosts));
 };

@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function PostState(props) {
     const dispatch=useDispatch();
     const deletePostFn=async (id)=>{
+        dispatch(deletePost(id));
         const url=`${process.env.REACT_APP_BASE_URL}api/user/post/delete/${id}`
         let response=await fetch(url,{
             method:"DELETE",
@@ -18,10 +19,6 @@ export default function PostState(props) {
         })
         response=await response.json();
         console.log(response);
-        if(response.success===true)
-        {
-            dispatch(deletePost({id}));
-        }
     }
 
 
