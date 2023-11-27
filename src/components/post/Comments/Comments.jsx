@@ -99,35 +99,28 @@ export default function Comments({
   };
 
   return (
-    <div>
+    <React.Fragment>
       <Dialog
-        fullScreen={fullScreen}
+        
+        maxWidth={"lg"}
         open={showComments}
         onClose={() => {
           setShowComments(false);
         }}
         aria-labelledby="responsive-dialog-title"
-        className="md:mr-[150px] overflow-y-auto"
+        className="md:mr-[150px] overflow-y-auto w-[100%]"
       >
         <div
           onClick={() => {
             setShowComments(false);
           }}
-          className="flex justify-end mt-3 mr-3 cursor-pointer"
+          className="flex justify-end mt-3 mr-3 cursor-pointer w-[70vw] mx-auto md:w-[70vw]"
         >
           <CloseIcon />
         </div>
-        <DialogContent
-          style={{
-            width: "100%",
-            minWidth: "600px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-          }}
-        >
-          <div style={{ marginTop: "0px" }} className="post">
-            <div className="postWrapper">
+        <DialogContent className="flex flex-col gap-[20px]">
+          <div style={{ marginTop: "0px" }} className="post ">
+            <div className="postWrapper ">
               <div className="postTop">
                 <div className="postTopLeft">
                   <div onClick={linkHandler}>
@@ -214,6 +207,6 @@ export default function Comments({
           )}
         </DialogContent>
       </Dialog>
-    </div>
+    </React.Fragment>
   );
 }

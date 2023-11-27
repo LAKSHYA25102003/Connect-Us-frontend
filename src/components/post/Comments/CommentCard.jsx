@@ -13,15 +13,13 @@ import { useTheme } from "@mui/material";
 import moment from "moment/moment";
 
 export default function CommentCard({ comment }) {
-  const timeAgo = moment((comment.createdAt)).fromNow();
+  const timeAgo = moment(comment.createdAt).fromNow();
   const context = useContext(PostContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const pf = process.env.REACT_APP_PUBLLC_FOLDER;
   const [displayPostEdit, setDisplayPostEdit] = useState(false);
   const currUser = useSelector((state) => state.user.user);
-
-
 
   const linkHandler = (e) => {
     e.preventDefault();
@@ -49,18 +47,6 @@ export default function CommentCard({ comment }) {
             </div>
             <span className="postProfileName">{comment.user.name}</span>
             <span className="postDate">{timeAgo}</span>
-          </div>
-          <div className="postTopRight">
-            {comment.user._id === currUser._id && (
-              <MoreVert onClick={()=>{setDisplayPostEdit(!displayPostEdit)}} className="verticalDot" />
-            )}
-            {displayPostEdit && (
-              <div className="postEditContainer">
-                <div className="postEdit">
-                  <div className="underline-none p-2 cursor-pointer">Delete Comment</div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
         <div className="postMid">
